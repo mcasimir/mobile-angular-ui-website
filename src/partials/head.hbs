@@ -1,0 +1,47 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  {{#if is_home }}
+  <title>{{config.site_title}} - {{config.site_tagline}}</title>
+  <meta itemprop="name" name="twitter:title" property="og:title" content="{{config.site_title}} - {{config.site_tagline}}" />
+  {{else}}
+  <title>{{title}} | {{config.site_title}}</title>
+  {{/if}}
+  
+  {{#if description}}
+  <meta itemprop="description" name="description" property="og:description" content="{{description}}" />
+  <meta name="twitter:description" content="{{description}}" /> 
+  {{/if}}
+  
+  {{#if is_post }}
+    <link rel="author" href="https://plus.google.com/+MaurizioCasimirri/posts"/>
+  {{/if}}
+
+  <link rel="publisher" href="https://plus.google.com/+MobileangularuiGp"/>
+  
+  {{#if image_path }}
+  <meta name="twitter:image:src" itemprop="image" property="og:image" content="{{site_url image_path}}" />
+  {{else}}
+  <meta name="twitter:image:src" itemprop="image" property="og:image" content="{{site_url config.default_image_path}}" />
+  {{/if}}
+  
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:site" content="@mobileangularui" /> 
+  <meta name="twitter:creator" content="@mauriziocas" />
+  <meta property="og:site_name" content="{{config.site_title}}" /> 
+
+  {{#if is_home}}
+  <meta property="og:type" content="website" />
+  {{else}}
+  <meta property="og:type" content="article" />
+  {{/if}}
+  
+  <meta property="og:url"   content="{{ page_url page }}" />
+  
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500' rel='stylesheet' type='text/css' />
+  <link rel="shortcut icon" href="/assets/img/favicon.png" />
+  <link rel="stylesheet" href="/assets/css/main.min.css" />
+</head>

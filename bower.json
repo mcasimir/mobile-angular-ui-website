@@ -1,0 +1,24 @@
+{
+  "name": "mobile-angular-ui-website",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mcasimir/mobile-angular-ui-website",
+  "authors": [
+    "mcasimir <maurizio.cas@gmail.com>"
+  ],
+  "description": "Mobile Angular UI website",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mobile-angular-ui": "~1.1.0-beta.22",
+    "toc": "~0.3.2",
+    "es5-shim": "~3.4.0",
+    "jquery-cookie": "~1.4.1"
+  }
+}
