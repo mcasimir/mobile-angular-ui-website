@@ -29,9 +29,6 @@
   margin-bottom: @line-height-computed;
   padding-top: @line-height-computed / 2;
   padding-bottom: @line-height-computed / 2;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #f7f7f8;
-  border-radius: 5px;
   ul {
     padding-left: 20px;
     @media (min-width: @screen-sm) {
@@ -40,9 +37,9 @@
   }
   li > a {
     display: block;
-    color: #5d83a3;
+    color: @brand-primary;
     padding: 5px 20px;
-
+    border-right: 1px solid #eee;
     &:hover, &:focus {
       text-decoration: none;
       background-color: #e8ebee;

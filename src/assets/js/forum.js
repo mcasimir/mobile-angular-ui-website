@@ -7,17 +7,17 @@ $(document).ready(function(){
     '</div>';
 
 
-    if (!$.cookie('hideMauiForumIssueNotice')) {
-      var alertEl = $(alertHtml);
-      $('#forum').prepend(alertEl);
-
-      $('#dont-bother-again').click(function(e){
-        alertEl.remove();
-        $.cookie('hideMauiForumIssueNotice', true, { expires: (365 * 30) });
-        e.preventDefault();
-        return false;
-      });
-    }
+    // if (!$.cookie('hideMauiForumIssueNotice')) {
+    //   var alertEl = $(alertHtml);
+    //   $('#forum').prepend(alertEl);
+    //
+    //   $('#dont-bother-again').click(function(e){
+    //     alertEl.remove();
+    //     $.cookie('hideMauiForumIssueNotice', true, { expires: (365 * 30) });
+    //     e.preventDefault();
+    //     return false;
+    //   });
+    // }
 
     document.getElementById('loading-forum-txt').appendChild( document.createTextNode("Loading Forum ...") );
     function hideLoading() {
@@ -31,4 +31,3 @@ $(document).ready(function(){
        + '&parenturl=' + encodeURIComponent(window.location.href);
   };
 });
-

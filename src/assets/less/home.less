@@ -1,3 +1,23 @@
+.home {
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 300;
+
+  h2 {
+    font-weight: 200;
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-size: 40px;
+    margin: 0 0 @line-height-computed;
+    @media (min-width: @screen-sm) {
+      font-size: 48px;
+      text-align: left;
+    }
+  }
+  
+  .text-center h2 {
+    text-align: center;
+  }
+}
+
 .home-body {
 
   text-align: center;
@@ -20,10 +40,6 @@
   .feature-text {
     @media (min-width: @screen-sm) {
       text-align: left;
-    }
-    h2 {
-      .h3;
-      margin: 0 0 @line-height-computed;
     }
   }
 

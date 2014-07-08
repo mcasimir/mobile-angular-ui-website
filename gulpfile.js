@@ -3,24 +3,18 @@ var gulp   = require('gulp'),
   connect  = require('gulp-connect'),
   rimraf   = require('rimraf'),
   bower    = require('bower'),
+  through2 = require('through2'),
   deploy   = require("gulp-gh-pages");
 
-gulp.on('err', function(e) {
-  console.log(e.err.stack);
-});
 
-gulp.task('clean', function (cb) {
-  rimraf('./out', cb);
-});
-
-gulp.task('stacktic', ['clean'], function(done) {
+function runStacktic(options, done) {
   stacktic({
     src: 'src',
     dest: 'out',
     host: 'http://mobileangularui.com/',
     site_title: "Mobile Angular UI",
     site_tagline: "Angular JS Mobile UI framework with Bootstrap 3 Css",
-    minify: true,
+    minify: (!! options.minify),
     less: {
       paths: ['bower_components', 'src/assets/less']
     }
@@ -34,6 +28,18 @@ gulp.task('stacktic', ['clean'], function(done) {
   .use('./src/lib/sitemap')
   .use('./src/lib/cname')
   .build(done);
+}
+
+gulp.on('err', function(e) {
+  console.log(e.err.stack);
+});
+
+gulp.task('clean', function (cb) {
+  rimraf('./out', cb);
+});
+
+gulp.task('stacktic', ['clean'], function(done) {
+  runStacktic({minify:false}, done);
 });
 
 gulp.task('connect', function() {
@@ -53,19 +59,27 @@ gulp.task('watch', function () {
   gulp.watch(['./src/**/*'], ['stacktic']);
 });
 
-gulp.task('bower-update', function (done) {
-  bower.commands
-  .update(['mobile-angular-ui'])
-  .on('end', function (installed) {
-    done();
+gulp.task('deploy', ['clean'], function (done) {
+  console.log("Updating Mobile Angular UI bower ...");
+  bower.commands.update(['mobile-angular-ui']).on('end', function (installed) {
+    console.log("Done updating Mobile Angular UI bower");
+    console.log("Building website ...");
+    runStacktic({minify:true}, function(){
+      console.log("Done building website");
+      console.log("Deploying ...");
+      var deployer = gulp.src("./out/**/*").pipe(deploy({
+        remoteUrl: 'git@github.com:mcasimir/mobile-angular-ui.git'
+      }));
+      deployer.on('end', function(){
+        console.log("DONE.");
+        done();
+      });
+      deployer.pipe(through2.obj(function(file, enc, callback){
+        console.log('deployer', file);
+        callback();
+      }));
+    });
   });
-});
-
-gulp.task('deploy', [ 'bower-update', 'stacktic'], function () {
-    gulp.src("./out/**/*")
-        .pipe(deploy({
-          remoteUrl: 'git@github.com:mcasimir/mobileangularui.git'
-        }));
 });
 
 gulp.task('default', ['stacktic','connect', 'watch']);
