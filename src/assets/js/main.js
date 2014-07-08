@@ -1,42 +1,103 @@
 $(document).ready(function(){
 
-  $('#toc').toc({
-      'selectors': 'h2,h3', //elements to use as headings
-      'container': '#docs', //element to find all selectors in
-      'smoothScrolling': true, //enable or disable smooth scrolling on click
-      'highlightOnScroll': true, //add class to heading that is currently in focus
-      'highlightOffset': 100, //offset to trigger the next headline
-      anchorName: function(i, heading, prefix) { //custom function for anchor name
-          var aname = $(heading).data('toc');
-          return aname || prefix+i;
+  var $githubCount = $(".github-count"),
+      $twitterCount = $(".twitter-count"),
+      $googlePlusCount = $(".google-plus-count");
+
+  if ($githubCount.length || $twitterCount.length || $googlePlusCount.length) {
+    $.get('http://mobile-angular-ui-social.herokuapp.com/', function(data){
+      $githubCount.text(""+data.github+" stars");
+      $twitterCount.text(""+data.twitter+" followers");
+      $googlePlusCount.text(""+data.google+" followers");
+    });
+  }
+
+  var $toc = $("#toc");
+  if ($toc.length) {
+    //
+    // Affix
+    //
+    var $tocParent = $toc.parent(),
+        $navbar = $('.navbar');
+        $footer = $('.footer');
+
+    $(window).resize(function() {
+      $toc.width($tocParent.width());
+    }).trigger("resize");
+
+    $toc.affix({
+      offset: {
+        top: 0,
+        bottom: function(){ return $footer.outerHeight(true); }
       }
+    });
+
+    //
+    // ScroolSpy replacement
+    //
+    var isActive = function(elem) {
+      var scrollTop = $(window).scrollTop();
+      var elemTop = elem.offset().top;
+      if (elemTop < scrollTop + 400) {
+        return true;
+      };
+      return false;
+    }
+
+    var scrollSpy = function(evt) {
+      // collect all toc items
+      var items = []
+      $toc.find("a").each(function(){
+        items.push({  tocItem: $(this), header: $(this.hash) });
+      });
+
+      // find last active toc item
+      found = null;
+
+      for (var i = items.length - 1; i >= 0; i--) {
+        var item = items[i];
+        if (isActive(item.header)) {
+          found = item.tocItem;
+          break;
+        };
+      };
+
+      $toc.find("li").removeClass('active');
+      if (found) {
+        found.parentsUntil('#toc', 'li').addClass('active');
+      };
+    };
+
+    $(window).scroll(scrollSpy);
+    $(window).resize(scrollSpy);
+
+    // Init affix and scrollspy
+    $(window).trigger("scroll");
+  }
+
+  // Smooth scroll
+  $('a[href*=#]:not([href=#]):not([data-slide])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - 70
+        }, 500);
+        return false;
+      }
+    }
   });
 
-  var sidebarContainer = $("#sidebar-container");
-  var sidebar = $("#sidebar");
-  var footer  = $('.footer');
-
-  adjustSidebar = function(e) {
-    var scrollBottom = $(window).scrollTop() + $(window).height();
-    var footerTop = footer.offset().top;
-
-    if (sidebarContainer.length > 0) {
-      var sidebarMaxHeight = (footerTop >= scrollBottom) ? $(window).height() : $(window).height() - (scrollBottom - footerTop);
-      sidebar.css("max-height", sidebarMaxHeight);
-      
-      var tocOffsetTop = sidebarContainer.offset().top;
-      if($(window).scrollTop() >= tocOffsetTop) {
-        sidebar.addClass("fix");
-        sidebar.css("left", sidebarContainer.offset().left);
-        sidebar.css("width", sidebarContainer.width());
-      } else {
-        sidebar.removeClass("fix");
-        sidebar.css("left", 'auto');
-      }        
-    };
-  };
-
-  $(window).scroll(adjustSidebar);
-  $(window).resize(adjustSidebar);
-
 });
+
+// IEMobile fix
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+  var msViewportStyle = document.createElement('style')
+  msViewportStyle.appendChild(
+    document.createTextNode(
+      '@-ms-viewport{width:auto!important}'
+    )
+  )
+  document.querySelector('head').appendChild(msViewportStyle);
+}

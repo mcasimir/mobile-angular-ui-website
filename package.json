@@ -1,37 +1,29 @@
 {
-  "name": "mobile-angular-ui-website",
+  "name": "Mobile-Angular-Ui-Website",
   "version": "0.0.0",
-  "description": "Mobile Angular UI website",
-  "main": "index.js",
+  "description": "Mobile Angular Ui Website",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "~3.8.1",
+    "gulp-clean": "~0.3.0",
+    "gulp-connect": "~2.0.5",
+    "stacktic": "~1.0.0-alpha.3",
+    "gulp-connect": "^2.0.5",
+    "gulp-gh-pages": "^0.3.2",
+    "rimraf": "^2.2.8",
+    "bower": "^1.3.7"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mcasimir/mobile-angular-ui-website.git"
+    "url": "https://github.com/stackticjs/website.git"
   },
-  "author": "",
+  "author": "mcasimir",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mcasimir/mobile-angular-ui-website/issues"
+    "url": "https://github.com/stackticjs/website/issues"
   },
-  "homepage": "https://github.com/mcasimir/mobile-angular-ui-website",
-  "devDependencies": {
-    "assemble": "^0.4.37",
-    "grunt": "^0.4.5",
-    "grunt-newer": "^0.7.0",
-    "grunt-contrib-connect": "^0.7.1",
-    "grunt-concurrent": "^0.5.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-cssmin": "^0.9.0",
-    "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-less": "^0.11.1",
-    "grunt-contrib-concat": "^0.4.0",
-    "semver": "^2.3.0",
-    "node-rest-client": "^0.8.8",
-    "bower": "^1.3.1",
-    "grunt-gh-pages": "^0.9.1"
-  }
+  "homepage": "https://github.com/stackticjs/website"
 }

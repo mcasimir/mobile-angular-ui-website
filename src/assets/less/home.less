@@ -1,0 +1,30 @@
+.home-body {
+
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+
+  section {
+    font-size: 22px;
+    line-height: 30px;
+    margin: @line-height-computed * 4 auto;
+    pre, code {
+      text-align: left;
+    }
+  }
+
+  .feature-figure {
+    margin-bottom: @line-height-computed * 2;
+  }
+
+  .feature-text {
+    @media (min-width: @screen-sm) {
+      text-align: left;
+    }
+    h2 {
+      .h3;
+      margin: 0 0 @line-height-computed;
+    }
+  }
+
+}

@@ -1,0 +1,90 @@
+#carousel-example-generic {
+  margin-bottom: 40px;
+}
+
+#carousel-example-generic .item {
+  text-align: center;
+  padding: 20px;
+}
+.carousel-container {
+  background: #333;
+  -moz-box-shadow: 0 0 8px #000 inset;
+  -webkit-box-shadow: 0 0 8px #000 inset;
+  -ms-box-shadow:  0 0 8px #000 inset;
+  box-shadow: 0 0 8px #000 inset;
+  padding-bottom: 30px;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  display: inline;
+  display: inline-block;
+}
+
+.carousel-shadow {
+  -moz-box-shadow: 0 0 20px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0,.5);
+  -ms-box-shadow: 0 0 20px rgba(0,0,0,.5);
+  box-shadow: 0 0 20px rgba(0,0,0,.5);
+}
+
+.carousel-indicators {
+bottom: -50px !important;
+}
+
+
+.carousel-indicators li {
+  border: 0 solid transparent;
+  margin: 0 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #777;
+}
+
+.carousel-indicators .active {
+  background-color: #bbb;
+  margin: 0 5px;
+  border: 0 solid transparent;
+  width: 10px;
+  height: 10px;
+}
+
+.carousel-control.left, .carousel-control.right {
+  display: none;
+  background-image: none;
+}
+
+#carousel-example-generic:hover .carousel-control.left,#carousel-example-generic:hover .carousel-control.right {
+  display: block;
+}
+
+
+.carousel-container h2 {
+  text-align: center;
+  color: #aaa;
+  padding: 20px 20px 0 20px;
+  margin: 0;
+}
+
+.carousel-container h3 {
+  font-size: 20px;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto @line-height-computed;
+  color: #ddd;
+}
+
+.carousel-control {
+  top: 50%;
+  margin-top: -10px;
+}
+
+.carousel-control .icon-prev, .carousel-control .fa-chevron-left {
+  left: 20px;
+}
+.carousel-control .icon-next, .carousel-control .fa-chevron-right {
+  right: 20px;
+}
+
+.carousel .item {
+  height: 544px;
+}

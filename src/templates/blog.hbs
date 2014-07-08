@@ -1,0 +1,28 @@
+<ul class="list-unstyled">
+  {{#each blogPages.items }}
+    {{#each items}}
+      <li>
+        <article>
+          <h3><a href="{{$path}}">{{title}}</a></h3>
+          <p>
+            <i>{{formatDate created_at}}</i> – {{description}}
+          </p>
+          <p>
+            <a class="btn btn-primary" href="{{$path}}">Read</a>
+          </p>
+          <br/>
+        </article>
+      </li>
+    {{/each  }}
+  {{/each  }}
+</ul>
+
+<ul class="pagination">
+{{#each blogPages.items }}
+  {{#ifCurrent $path }}
+    <li class="active"><a href="{{$path}}">{{title}}</a></li>
+  {{else}}
+    <li><a href="{{$path}}">{{page}}</a></li>
+  {{/ifCurrent}}
+{{/each  }}
+</ul>
