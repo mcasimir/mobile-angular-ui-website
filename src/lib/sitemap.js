@@ -1,12 +1,11 @@
 module.exports = function(stacktic) {
 
   stacktic
-  .controller('Sitemap', function() {
+  .controller('Sitemap', function(Page, Post, BlogPages) {
     this.route("/sitemap.xml")
-    .context(function(){
-      this.$sitemapItems = stacktic.models.Page.collection.concat(stacktic.models.Post.collection).concat(stacktic.context.blogPages);
-    })
-    .render( 'sitemap' );
+    .render( 'sitemap', {
+      items: Page.concat(Post).concat(BlogPages)
+    });
   });
 
 };

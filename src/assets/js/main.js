@@ -6,9 +6,15 @@ $(document).ready(function(){
 
   if ($githubCount.length || $twitterCount.length || $googlePlusCount.length) {
     $.get('http://mobile-angular-ui-social.herokuapp.com/', function(data){
-      $githubCount.text(""+data.github+" stars");
-      $twitterCount.text(""+data.twitter+" followers");
-      $googlePlusCount.text(""+data.google+" followers");
+      if (data.github) { 
+        $githubCount.text(""+data.github+" stars"); 
+      }
+      if (data.twitter) { 
+        $twitterCount.text(""+data.twitter+" followers"); 
+      }
+      if (data.google) { 
+        $googlePlusCount.text(""+data.google+" followers"); 
+      }
     });
   }
 

@@ -8,13 +8,11 @@ module.exports = function(stacktic) {
     });
   })
 
-
   .model("Doc", function() {
     this.dataSource('fs', {
       src: 'docs/**/*'
     });
   })
-
 
   .model("Page", function() {
     this.dataSource('fs', {
@@ -24,26 +22,22 @@ module.exports = function(stacktic) {
     this.slug('title');
   })
 
+  .controller('Pages', function(context, BowerInfo, Page) {
 
-  .controller('Pages', function() {
-    this.context.version = this.models.BowerInfo.first().latest.version;
-    this.context.nav = this.models.Page.where({
-      nav: true
-    });
+    this.route("/")
+        .bind(Page.where({ $fs: { basename: 'home.hbs' } }))
+        .context({
+          isHome: true,
+          version: BowerInfo.first().latest.version
+        });
 
-    this.route("/", this.models.Page.where({
-      slug: "home"
-    })).render('hbs').context({
-      isHome: true
-    });
-
-    this.route("/:{$slug}/", this.models.Page.reject({
-      slug: "home"
-    })).render('hbs').render('toc', {
-      container: '.content',
-      levels: ['h2', 'h3']
-    });
-
+    this.route("/:{$slug}/")
+        .bind(Page.reject({ $fs: { basename: 'home.hbs' } }))
+        .render('hbs')
+        .render('toc', {
+          container: '.content',
+          levels: ['h2', 'h3']
+        });
   });
 
 };

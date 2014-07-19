@@ -9,8 +9,8 @@ module.exports = function(stacktic) {
     });
   })
 
-  .controller('Demo', function(){
-    this.route("/:{$fs.pathFromBase}", this.models.Demo).render(false);
+  .controller('Demo', function(Demo){
+    this.route("/:{$fs.pathFromBase}", Demo).render(false);
   });
 
 };

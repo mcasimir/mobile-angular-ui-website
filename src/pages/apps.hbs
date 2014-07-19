@@ -1,0 +1,46 @@
+---
+title: "App Showcase"
+description: "A showcase of applications made with Mobile Angular Ui"
+nav: true
+---
+
+<div class="well">
+  <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+    Submit your App
+  </button>
+  Sorry this section is very new.. no apps here yet.
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Made an app with Mobile Angular Ui? Let everyone know!</h4>
+      </div>
+      <div class="modal-body">
+{{#md}}
+Send an email to <a href="mailto:mobileangularui@gmail.com">mobileangularui@gmail.com</a> indicating:
+
+Required:
+- App name
+- App description
+- App icon 144x144
+- Some screenshots
+- Platforms (android, ios, ms, website...)
+- Where to find your app (website, app store, play store...)
+
+Optional:
+- Product/company/developer website
+- Whatever you wish to add to your app page
+
+{{/md}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="mailto:mobileangularui@gmail.com" class="btn btn-primary">Send the email</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,8 @@ module.exports = function(stacktic) {
              'bootstrap/js/affix.js',
              'bootstrap/js/carousel.js',
              'bootstrap/js/transition.js',
-             'bootstrap/js/collapse.js' ]
+             'bootstrap/js/collapse.js',
+             'bootstrap/js/modal.js' ]
     });
 
     this.dataSource('fs', {
@@ -46,21 +47,21 @@ module.exports = function(stacktic) {
   });
 
   stacktic
-  .controller('Assets', function() {
+  .controller('Assets', function(Stylesheets, Javascripts, Streams) {
 
     var minify = !! stacktic.config.get('minify');
 
-    this.route("/assets/css/main.css", this.models.Stylesheets).render('less', { compress: minify });
-
+    this.route("/assets/css/main.css", Stylesheets).render('less', { compress: minify });
     this.route("/assets/js/main.js",
-      // concatenated scripts
-      this.models.Javascripts.reduce(function(acc, item){
+
+      // concatenate scripts
+      Javascripts.reduce(function(acc, item){
         acc.$content = acc.$content + item.$content; return acc;
       }, {$content: ''})
 
     ).render(minify && 'uglify');
 
-    this.route("/assets/:{$fs.pathFromBase}", this.models.Streams).render(false);
+    this.route("/assets/:{$fs.pathFromBase}", Streams).render(false);
   });
 
 };
