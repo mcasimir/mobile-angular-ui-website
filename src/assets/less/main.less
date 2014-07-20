@@ -87,11 +87,13 @@ section {
     width: 1%;
     padding: 0;
   }
+  > .btn:active {
+    box-shadow: none;
+  }
   > .btn-group .btn {
     width: 100%;
   }
 }
-
 
 h2, h3, h4, h5, h6 {
   margin-top: floor(@line-height-computed * 1.5);
@@ -118,3 +120,73 @@ table {
 @import "home.less";
 @import "features.less";
 @import "forum.less";
+
+
+.btn-group-social .btn {
+  &:hover {
+    > .fa {
+      color: #000;
+    }
+  }
+}
+
+.btn-social {
+  display: block;
+  float: left;
+  display: block;
+  float: left;
+  > .fa {
+    line-height: 22px;
+    font-size: 20px;
+    color: #555;
+  }
+}
+
+.flag {
+  display: none;
+  &.loaded {
+    display: block;
+  }
+  font-weight: normal;
+  color: #333;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 0 4px;
+  float: left;
+  position: relative;
+  height: 22px;
+  line-height: 20px;
+  margin-left: 6px;
+}
+
+.flag:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(192,192,192,0);
+  border-right-color: #ccc;
+  border-width: 5px;
+  margin-top: -5px;
+}
+
+.flag:after {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255,255,255,0);
+  border-right-color: #fafafa;
+  border-width: 4px;
+  margin-top: -4px;
+}

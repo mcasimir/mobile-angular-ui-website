@@ -7,13 +7,16 @@ $(document).ready(function(){
   if ($githubCount.length || $twitterCount.length || $googlePlusCount.length) {
     $.get('http://mobile-angular-ui-social.herokuapp.com/', function(data){
       if (data.github) { 
-        $githubCount.text(""+data.github+" stars"); 
+        $githubCount.text(""+data.github);
+        $githubCount.addClass('loaded');
       }
       if (data.twitter) { 
-        $twitterCount.text(""+data.twitter+" followers"); 
+        $twitterCount.text(""+data.twitter);
+        $twitterCount.addClass('loaded');
       }
       if (data.google) { 
-        $googlePlusCount.text(""+data.google+" followers"); 
+        $googlePlusCount.text(""+data.google);
+        $googlePlusCount.addClass('loaded');
       }
     });
   }

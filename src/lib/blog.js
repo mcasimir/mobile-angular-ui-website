@@ -22,9 +22,23 @@ module.exports = function(stacktic) {
 
   stacktic
   .controller('Blog', function(Post, BlogPage) {
+    
     this.route('/blog/:{$slug}/', Post).render('md').render('hbs');
-    this.route('/blog/', BlogPage.limit(1)).render('hbs', {template: 'blog'});
-    this.route('/blog/page/:{$page}/', BlogPage.offset(1)).render('hbs', {template: 'blog'});
+    
+    this.route('/blog/')
+    .bind(BlogPage.limit(1))
+    .context(function(){
+      this.blogPages = BlogPage.collection.items
+    })
+    .render('hbs', {template: 'blog'});
+
+    this.route('/blog/page/:{$page}/')
+    .bind(BlogPage.offset(1))
+    .context(function(){
+      this.blogPages = BlogPage.collection.items
+    })
+    .render('hbs', {template: 'blog'});
+
   });
 
 };

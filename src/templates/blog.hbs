@@ -1,5 +1,5 @@
 <ul class="list-unstyled">
-  {{#each blogPages.items }}
+  {{#each blogPages }}
     {{#each items}}
       <li>
         <article>
@@ -17,12 +17,15 @@
   {{/each  }}
 </ul>
 
+
+{{#if blogPages.length}}
 <ul class="pagination">
-{{#each blogPages.items }}
+{{#each blogPages }}
   {{#ifCurrent $path }}
-    <li class="active"><a href="{{$path}}">{{title}}</a></li>
+    <li class="active"><span>{{page}}</span></li>
   {{else}}
     <li><a href="{{$path}}">{{page}}</a></li>
   {{/ifCurrent}}
 {{/each  }}
 </ul>
+{{/if}}
