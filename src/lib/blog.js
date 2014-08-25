@@ -9,6 +9,7 @@ module.exports = function(stacktic) {
 
     this.parseYfm();
     this.slug('title');
+    this.parseDates('created_at');
 
     this.on('ready', function(Post){
       BlogPage = stacktic.models.BlogPage
@@ -23,7 +24,10 @@ module.exports = function(stacktic) {
   stacktic
   .controller('Blog', function(Post, BlogPage) {
     
-    this.route('/blog/:{$slug}/', Post).render('md').render('hbs');
+    this.route('/blog/:{$slug}/', Post).render('md').render('hbs').render('toc', {
+      container: '.content',
+      levels: ['h2', 'h3']
+    });
     
     this.route('/blog/')
     .bind(BlogPage.limit(1))
@@ -37,7 +41,7 @@ module.exports = function(stacktic) {
     .context(function(){
       this.blogPages = BlogPage.collection.items
     })
-    .render('hbs', {template: 'blog'});
+    .render('hbs', {template: 'blog'})
 
   });
 

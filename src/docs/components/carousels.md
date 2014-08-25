@@ -58,30 +58,27 @@ app.directive( "carouselExampleItem", function($rootScope, $swipe){
       var carouselId = element.parent().parent().attr("id");
 
       var translateAndRotate = function(x, y, z, deg){
-        element[0].style["-webkit-transform"] =
-           "translate3d("+x+"px,"+ y +"px," + z + "px) rotate("+ deg +"deg)";
-        element[0].style["-moz-transform"] =
-           "translate3d("+x+"px," + y +"px," + z + "px) rotate("+ deg +"deg)";
-        element[0].style["-ms-transform"] =
-           "translate3d("+x+"px," + y + "px," + z + "px) rotate("+ deg +"deg)";
-        element[0].style["-o-transform"] =
-           "translate3d("+x+"px," + y  + "px," + z + "px) rotate("+ deg +"deg)";
-        element[0].style["transform"] =
-           "translate3d("+x+"px," + y + "px," + z + "px) rotate("+ deg +"deg)";
+        element[0].style["-webkit-transform"] = "translate3d("+x+"px,"+ y +"px," + z + "px) rotate("+ deg +"deg)";
+        element[0].style["-moz-transform"] = "translate3d("+x+"px," + y +"px," + z + "px) rotate("+ deg +"deg)";
+        element[0].style["-ms-transform"] = "translate3d("+x+"px," + y + "px," + z + "px) rotate("+ deg +"deg)";
+        element[0].style["-o-transform"] = "translate3d("+x+"px," + y  + "px," + z + "px) rotate("+ deg +"deg)";
+        element[0].style["transform"] = "translate3d("+x+"px," + y + "px," + z + "px) rotate("+ deg +"deg)";
       }
 
       $swipe.bind(element, {
-        start: function(coords) {
+        start: function(coords) {
+          endAction = null;
           startX = coords.x;
           startY = coords.y;
         },
 
-        cancel: function(e) {
+        cancel: function(e) {
+          endAction = null;
           translateAndRotate(0, 0, 0, 0);
           e.stopPropagation();
         },
 
-        end: function(coords, e) {
+        end: function(coords, e) {
           if (endAction == "prev") {
             $rootScope.carouselPrev(carouselId);
           } else if (endAction == "next") {
@@ -91,7 +88,7 @@ app.directive( "carouselExampleItem", function($rootScope, $swipe){
           e.stopPropagation();
         },
 
-        move: function(coords) {
+        move: function(coords) {
           if( startX != null) {
             var deltaX = coords.x - startX;
             var deltaXRatio = deltaX / element[0].clientWidth;
@@ -99,6 +96,8 @@ app.directive( "carouselExampleItem", function($rootScope, $swipe){
               endAction = "next";
             } else if (deltaXRatio &lt; -0.3){
               endAction = "prev";
+            } else {
+              endAction = null;
             }
             translateAndRotate(deltaXRatio * 200, 0, 0, deltaXRatio * 15);
           }
@@ -106,7 +105,6 @@ app.directive( "carouselExampleItem", function($rootScope, $swipe){
       });
     }
 });
-
 ```
 
 Now swiping items we will see them moving and rotating. When releasing an item if the swipe lenght was at least 3/10 of the item width then carouselPrev/carouselNext are invoked according to swipe direction.
