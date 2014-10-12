@@ -1,5 +1,5 @@
 var gulp   = require('gulp'),
-  stacktic = require('../../stackticjs/stacktic'),
+  stacktic = require('stacktic'),
   connect  = require('gulp-connect'),
   rimraf   = require('rimraf'),
   bower    = require('bower'),

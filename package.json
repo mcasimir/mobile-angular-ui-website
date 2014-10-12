@@ -7,7 +7,7 @@
     "gulp": "~3.8.1",
     "gulp-clean": "~0.3.0",
     "gulp-connect": "~2.0.5",
-    "stacktic": "~1.0.0-alpha.3",
+    "stacktic": "~1.0.0-beta.3",
     "gulp-connect": "^2.0.5",
     "gulp-gh-pages": "^0.3.2",
     "rimraf": "^2.2.8",
