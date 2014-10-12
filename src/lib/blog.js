@@ -13,7 +13,7 @@ module.exports = function(stacktic) {
 
     this.on('ready', function(Post){
       BlogPage = stacktic.models.BlogPage
-      Post.collection = Post.sortBy('created_at', 'desc');
+      Post.collection = Post.where({published: true}).sortBy('created_at', 'desc');
       pages = Post.paginate(10).merge({title: 'Blog'});
       BlogPage.collection = stacktic.createCollection(pages);
     })

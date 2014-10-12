@@ -21,6 +21,14 @@ $(document).ready(function(){
     });
   }
 
+  // Open each external links in a new window
+  $('a').each(function() {
+     var a = new RegExp('/' + window.location.host + '/');
+     if (!a.test(this.href)) {
+        $(this).attr("target","_blank");
+     }
+  });
+
   var $toc = $("#toc");
   if ($toc.length) {
     //

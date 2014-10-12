@@ -1,0 +1,48 @@
+//=======================================
+// Expo
+//=======================================
+
+.expo {
+  display: none;
+  color: #fff;
+  position: relative;
+  padding: 0;
+  margin: 40px 0;
+
+  .expo-track {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    .box-shadow(1px 1px 4px rgba(0,0,0,0.5) inset);
+    background: #333;
+  }
+  
+  .expo-viewport {
+    width: 9999px;
+    .clearfix();
+    .translate3d(0,0,0);
+  }
+
+  .expo-item {
+    display: block;
+    float: left;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .expo-prev, .expo-next {
+    display: none;
+  }
+  
+  img {
+    display: block;
+    height: 568px;
+    width: auto;
+    .box-shadow(3px 3px 4px #000);
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}

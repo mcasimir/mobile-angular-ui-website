@@ -5,6 +5,7 @@ description: "A tutorial about starting a fresh mobile application using Phonega
 kind: article
 toc: true
 comments: true
+published: true
 ---
 
 Ready to code your first Phonegap App with Mobile Angular Ui? In the following tutorial I will show you how. I will create a super simple Weather app, covering the basics of setting up and coding relevant part of it.

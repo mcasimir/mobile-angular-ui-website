@@ -3,6 +3,7 @@ title: "Toggle basics: creating dropdown buttons"
 created_at: 2014-05-16
 description: "A tutorial explaining how to create dropdown buttons with Mobile Angular UI togglable/toggle directive."
 kind: article
+published: true
 ---
 
 Bootstrap dropdown buttons can be created using `[toggle]` and `[toggleables]` directives in Mobile Angular UI.

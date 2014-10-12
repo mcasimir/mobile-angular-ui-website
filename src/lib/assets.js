@@ -13,7 +13,8 @@ module.exports = function(stacktic) {
     });
 
     this.dataSource('fs', {
-      src: [ 'assets/js/forum.js',
+      src: [ 'assets/js/expo.js',
+             'assets/js/forum.js',
              'assets/js/main.js' ]
     });
   });

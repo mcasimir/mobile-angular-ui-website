@@ -1,15 +1,39 @@
----
-title: "App Showcase"
-description: "A showcase of applications made with Mobile Angular Ui"
-nav: true
----
-
-<div class="well">
-  <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
-    Submit your App
-  </button>
-  Sorry this section is very new.. no apps here yet.
+<div class="alert">
+Made an app with mobile angular UI? Let everyone know!
+<button class="btn btn-primary pull-right btn-submit-your-app" data-toggle="modal" data-target="#myModal">
+  Submit your App <i class="fa fa-chevron-right"></i>
+</button>
 </div>
+
+
+<div class="row text-center">
+  {{#each appsPages }}
+    {{#each items}}
+    <div class="col-sm-3">
+      <a href="{{$path}}" class="app-icon">
+      <img src="{{icon}}" alt="{{title}}" class="app-icon-img">
+      <h3 class="app-icon-title">{{title}}</h3>
+      </a>
+    </div>
+    {{/each  }}
+  {{/each  }}
+</div>
+
+{{#if appsPages.length}}
+<ul class="pagination">
+{{#each appsPages }}
+  {{#ifCurrent $path }}
+    <li class="active"><span>{{page}}</span></li>
+  {{else}}
+    <li><a href="{{$path}}">{{page}}</a></li>
+  {{/ifCurrent}}
+{{/each  }}
+</ul>
+{{/if}}
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

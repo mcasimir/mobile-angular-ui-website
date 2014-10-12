@@ -3,6 +3,7 @@ title: "Submit your App"
 created_at: 2014-07-20
 description: "Made an app with Mobile Angular Ui? Let everyone know!"
 kind: article
+published: true
 ---
 
 ## Made an app with Mobile Angular Ui? Let everyone know!

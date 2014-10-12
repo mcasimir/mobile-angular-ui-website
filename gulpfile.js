@@ -23,6 +23,7 @@ function runStacktic(options, done) {
   .use('./src/lib/helpers')
   .use('./src/lib/pages')
   .use('./src/lib/blog')
+  .use('./src/lib/apps')
   .use('./src/lib/demo')
   .use('./src/lib/assets')
   .use('./src/lib/sitemap')
