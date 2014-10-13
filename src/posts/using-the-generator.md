@@ -27,7 +27,7 @@ Plus Bootstrap/AngularUi components are not designed to support a mobile interac
 ### Installing required tools
 
 ``` bash
-npm install -g yo gulp generator-mobileangularui
+npm install -g bower yo gulp generator-mobileangularui
 ```
 
 ``` bash
@@ -133,19 +133,21 @@ module.exports = function(config) {
   config.minify_images = true;
 
   // Development web server
-  // Setting to false will disable it
-  config.server = {
-                    host: '0.0.0.0',
-                    port: '8000'
-                  };
+
+  config.server.host = '0.0.0.0';
+  config.server.port = '8000';
+  
+  // Set to false to disable it:
+  // config.server = false;
 
   // Weinre Remote debug server
-  // Setting to false will disable it
-  config.weinre = {
-           httpPort:     8001,
-           boundHost:    'localhost'
-         };
   
+  config.weinre.httpPort = 8001;
+  config.weinre.boundHost = 'localhost';
+
+  // Set to false to disable it:
+  // config.weinre = false;
+    
   // 3rd party components
   // config.vendor.js.push('.bower_components/lib/dist/lib.js');
   // config.vendor.fonts.push('.bower_components/font/dist/*');
