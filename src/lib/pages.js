@@ -36,7 +36,7 @@ module.exports = function(stacktic) {
         .render('hbs')
         .render('toc', {
           container: '.content',
-          levels: ['h2', 'h3']
+          levels: ['h2', 'h3', 'h4']
         });
   });
 

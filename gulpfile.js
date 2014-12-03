@@ -46,6 +46,7 @@ gulp.task('stacktic', ['clean'], function(done) {
 gulp.task('connect', function() {
   connect.server({
     root: 'out',
+    port: '5000',
     livereload: true
   });
 });

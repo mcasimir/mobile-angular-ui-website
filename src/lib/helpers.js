@@ -27,7 +27,7 @@ module.exports = function(stacktic){
   Handlebars.registerHelper('doc', function(src){
     sec = stacktic.models.Doc.where({$fs:{ pathFromBase: 'docs/' + src + ".md" }}).first();
     if (sec) {
-      return new Handlebars.SafeString(sec.$content);
+      return new Handlebars.SafeString(sec.$content + '\n');
     } else {
       throw new Error('Can\'t find doc: ' + src);
     }
