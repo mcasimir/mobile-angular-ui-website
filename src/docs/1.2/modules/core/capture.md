@@ -2,7 +2,7 @@
 
 ##### Description
 
-The capture module exposes directives to let you extract markup which can be used in other parts of a template using `uiContentFor` and `uiYieldTo` directives.
+The `capture` module exposes directives to let you extract markup which can be used in other parts of a template using `uiContentFor` and `uiYieldTo` directives.
 
 It provides a way to move or clone a block of markup to other parts of the document.
 

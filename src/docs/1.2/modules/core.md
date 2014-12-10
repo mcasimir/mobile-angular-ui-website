@@ -10,7 +10,7 @@ angular.module('myApp', ['mobile-angular-ui.core']);
 
 <div class="h5">Description</div>
 
-It has all the core functionalities of Mobile Angular UI. It aims to act as a common base for a UI framework providing facilities to implement interaction with angular.
+It has all the core functionalities of Mobile Angular UI. It aims to act as a common base for a UI framework providing services and directives to create components and implement UI interactions with angular.
 
 <div class="alert alert-success">
   <b>NOTE</b>
@@ -21,7 +21,3 @@ It has all the core functionalities of Mobile Angular UI. It aims to act as a co
     <li><b>You can use it on any Angular Application and with any CSS framework.</b></li>
   </ul>
 </div>
-
-<div class="h5">Functionalities</div>
-
-By using this module

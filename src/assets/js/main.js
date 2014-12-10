@@ -129,8 +129,7 @@ $(document).ready(function(){
         { name:'activeLinks', children: [] },
         { name:'capture', children: [] },
         { name:'outerClick', children: [] },
-        { name:'sharedState', children: [] },
-        { name:'ui', children: [] }
+        { name:'sharedState', children: [] }
       ] },
       { name: 'Components', children: [
         {name: 'modals', children: [] },

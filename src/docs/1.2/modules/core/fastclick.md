@@ -2,7 +2,7 @@
 
 ##### Description
 
-`mobile-angular-ui.fastclick` module sets up `fastclick.js` to remove click delays on the whole document.
+`mobile-angular-ui.core.fastclick` module sets up `fastclick.js` to remove click delays on the whole document.
 
 ##### Usage
 

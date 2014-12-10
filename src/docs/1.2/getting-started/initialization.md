@@ -20,8 +20,6 @@ angular.module('myApp', [
   });
 ```
 
-
-
 If you wish you can avoid to load whole `mobile-angular-ui` modules at all and pick a subset of the loaded modules to fit your needs. This is how the `mobile-angular-ui` module is defined with its dependencies.
 
 ``` javascript
@@ -45,6 +43,8 @@ angular.module('mobile-angular-ui', [
 
 ##### Distributed package content
 
+###### Regular usage files
+
 | File | Description |
 | --- | --- |
 | `dist/css/mobile-angular-ui-base.css` | Mobile only css. it has no media queries except for `col-sm-*` grid. It also hasn't :hover styles. It is intended to target phones and tablets |
@@ -55,7 +55,16 @@ angular.module('mobile-angular-ui', [
 | `dist/js/mobile-angular-ui.migrate.min.js` | Adapters to migrate from 1.1 to 1.2 without too much hurt |
 | `dist/fonts/fontawesome*` | Fonts from FontAwesome icons toolkit |
 
-##### Seting up a mobile only app
+###### Stand-alone modules files
+
+| File | Description |
+| --- | --- |
+| `dist/js/mobile-angular-ui.core.min.js` | Core Module |
+| `dist/js/mobile-angular-ui.components.min.js` | Components |
+
+##### Examples
+
+###### Seting up a mobile only app
 
 ``` html
 <link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
@@ -67,7 +76,7 @@ angular.module('mobile-angular-ui', [
 </script>
 ```
 
-##### Seting up a responsive app
+###### Seting up a responsive app
 
 ``` html
 <link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
@@ -81,14 +90,14 @@ angular.module('mobile-angular-ui', [
 </script>
 ```
 
-##### Enabling built-in gestures modules (not stable yet)
+###### Enabling built-in gestures modules (not stable yet)
 
 ``` html
 <!-- Required to use $drag, $swipe and Translate services -->
 <script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
 ```
 
-##### Use the migration module to move from v1.1 to v1.2
+###### Use the migration module to move from v1.1 to v1.2
 
 ``` html
 <!-- Only required to import legacy syntax and directives. You won't need it 
@@ -96,4 +105,15 @@ unless you are attempting to move an app from Mobile Angular UI 1.1 to 1.2 -->
 <script src="/dist/js/mobile-angular-ui.migrate.min.js"></script>
 ```
 
+###### Use with other css frameworks (ie. [Topcoat](http://topcoat.io/))
 
+``` html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-mobile-dark.css" />
+<script src="angular.min.js">
+</script>
+<script src="angular-route.min.js">
+</script>
+<script src="mobile-angular-ui/dist/js/mobile-angular-ui.core.min.js">
+</script>
+<script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
+```
