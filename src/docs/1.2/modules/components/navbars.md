@@ -1,8 +1,8 @@
 #### Navbars
 
-Bootstrap default navbars are awesome for responsive websites, but are not the best to interact with in a small screen. Plus fixed positioning is not an option to create navbars standing in top or bottom of the screen.
+Bootstrap default navbars are awesome for responsive websites, but are not the best with a small screen. Also fixed positioning is yet not an option to create navbars standing in top or bottom of the screen.
 
-Mobile Angular Ui offers an alternative to bootstrap navbars that is better suitable for mobile.
+Mobile Angular Ui offers an alternative to bootstrap navbars that is more suitable for mobile.
 
 It uses scrollable areas to avoid scroll issues. In the following figure you can see the difference between fixed navbars and navbars with absolute positioning.
 
@@ -62,4 +62,4 @@ Consider the following example:
 
 ```
 
-As you can see the markup is pretty straightforward: there is a `.navbar-brand` with its new specification, `.navbar-brand-center`, that will render the title centered and below the two button groups. Note that `.navbar-brand-center` will position the title with absolute positioning ensuring that it will never cover the buttons, which would cause interaction problems.
+`.navbar-brand-center` is a specialization of BS3's `.navbar-brand`. It will render the title centered and below the two button groups. Note that `.navbar-brand-center` will position the title with absolute positioning ensuring that it will never cover the buttons, which would cause interaction problems.

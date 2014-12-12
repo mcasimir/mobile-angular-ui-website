@@ -95,12 +95,15 @@ $(document).ready(function(){
   // Smooth scroll
   $('a[href*=#]:not([href=#]):not([data-slide])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var href = this.href;
       var target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html,body').animate({
           scrollTop: target.offset().top - 70
-        }, 500);
+        }, 500, function() {
+          window.location.href = href;
+        });
         return false;
       }
     }

@@ -1,4 +1,4 @@
-#### Scrollbars
+#### Scrollable Areas
 
 First of all: one thing you'll always have to deal with approaching mobile web app development is scroll and `position:fixed` bugs.
 
