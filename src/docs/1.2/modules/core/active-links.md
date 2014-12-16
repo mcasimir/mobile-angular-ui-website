@@ -1,12 +1,12 @@
-#### Active Links
+### Active Links
 
-##### Description
+#### Description
 
 `mobile-angular-ui.activeLinks` module sets up `.active` class for `a` elements those `href` attribute matches the current angular `$location` url. It takes care of excluding both search part and hash part from comparison.
 
 `.active` classes are added/removed each time one of `$locationChangeSuccess` or `$includeContentLoaded` is fired.
 
-##### Usage
+#### Usage
 
 Just declare it as a dependency to your app unless you have already included one of its super-modules.
 

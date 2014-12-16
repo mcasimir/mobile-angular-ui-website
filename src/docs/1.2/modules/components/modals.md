@@ -1,4 +1,4 @@
-#### Modals and Overlays
+### Modals and Overlays
 
 Modals are basically the same of Bootstrap 3 but you have to use uiState with `ngIf/uiIf` or `ngHide/uiHide` to `activate/dismiss` it. By default both modals and overlay are made always showing up by css rule `.modal {display:block}`, so you can use it with `ngAnimate` and other angular directives in a simpler way.
 
@@ -25,7 +25,7 @@ Then you can wrap your modals and overlays in `contentFor`:
 </div>
 ```
 
-##### Modals
+#### Modals
 
 ``` html
 <div ui-content-for="modals">
@@ -51,7 +51,7 @@ Then you can wrap your modals and overlays in `contentFor`:
 </div>
 ```
 
-##### Overlays
+#### Overlays
 
 Overlay are just like to modals except they looks more native in mobile devices with a blurred overlay in background.
 

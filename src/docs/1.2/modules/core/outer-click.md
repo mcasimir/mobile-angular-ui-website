@@ -1,10 +1,10 @@
-#### Outer Click
+### Outer Click
 
-##### Description
+#### Description
 
 Provides a directive to specifiy a behaviour when click/tap events happen outside an element. This can be easily used to implement eg. __close on outer click__ feature for a dropdown.
 
-##### Usage
+#### Usage
 
 Declare it as a dependency to your app unless you have already included some of its super-modules.
 

@@ -1,4 +1,4 @@
-#### Scrollable
+### Scrollable
 
 One thing you'll always have to deal with approaching mobile web app development is scroll and `position:fixed` bugs.
 
@@ -18,7 +18,7 @@ Markup for any scrollable areas is as simple as:
 
 This piece of code will trigger a directive that properly setup a new `Overthrow` instance for the `.scrollable` node.
 
-##### Headers and footers
+#### Headers and footers
 
 `.scrollable-header/.scrollable-footer` can be used to add fixed header/footer to a scrollable area without having to deal with css height and positioning to avoid breaking scroll.
 
@@ -30,7 +30,7 @@ This piece of code will trigger a directive that properly setup a new `Overthrow
 </div>
 ```
 
-##### scrollTo
+#### scrollTo
 
 `.scrollable-content` controller exposes a `scrollTo` function: `scrollTo(offsetOrElement, margin)` 
 
@@ -50,7 +50,7 @@ scrollableContentController.scrollTo(containedElement, 10);
 scrollableContentController.scrollTo(200);
 ```
 
-##### `ui-scroll-bottom/ui-scroll-top`
+#### `ui-scroll-bottom/ui-scroll-top`
 
 You can use `ui-scroll-bottom/ui-scroll-top` directives handle that events and implement features like _infinite scroll_.
 

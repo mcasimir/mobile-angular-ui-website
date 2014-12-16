@@ -1,4 +1,4 @@
-#### Navbars
+### Navbars
 
 Bootstrap default navbars are awesome for responsive websites, but are not the best with a small screen. Also fixed positioning is yet not an option to create navbars standing in top or bottom of the screen.
 
@@ -30,7 +30,7 @@ Here is the basic markup to achieve this.
 
 As you can notice the base class is `.navbar-app` while the positioning is obtained adding either `.navbar-absolute-top` or `.navbar-absolute-bottom` class.
 
-#### Mobile Navbar Layout
+### Mobile Navbar Layout
 
 Top navbar in mobile design most of the times follows a clear pattern: a centered title surrounded by one or two action buttons, the _back_ or the _menu_ buttons are two common examples.
 

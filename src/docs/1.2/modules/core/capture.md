@@ -1,6 +1,6 @@
-#### Capture
+### Capture
 
-##### Description
+#### Description
 
 The `capture` module exposes directives to let you extract markup which can be used in other parts of a template using `uiContentFor` and `uiYieldTo` directives.
 
@@ -8,7 +8,7 @@ It provides a way to move or clone a block of markup to other parts of the docum
 
 This method is particularly useful to setup parts of the layout within an angular view. Since blocks of html are transplanted within their original `$scope` is easy to create layout interactions depending on the context. Some tipical task you can accomplish with these directives are: _setup the navbar title depending on the view_ or _place a submit button for a form inside a navbar_.
 
-##### Usage
+#### Usage
 
 Declare it as a dependency to your app unless you have already included some of its super-modules.
 

@@ -29,7 +29,6 @@ nav: true
 
 <section>
 {{# md}}
-## Modules
 
 {{doc '1.2/modules/overview'}}
 <hr>
@@ -61,7 +60,11 @@ nav: true
 
 {{doc '1.2/modules/gestures'}}
 
-Coming soon ...
+{{doc '1.2/modules/gestures/drag' }}
+<hr>
+{{doc '1.2/modules/gestures/swipe' }}
+<hr>
+{{doc '1.2/modules/gestures/transform' }}
 
 <hr>
 {{/md}}
@@ -71,8 +74,37 @@ Coming soon ...
 {{# md}}
 ## Utils
 
+Utils contains just css shorthands to achieve mobile-friendly layouts.
+
+{{doc '1.2/utils/sections' }}
 {{doc '1.2/utils/justified-blocks' }}
+
 {{/md}}
 </section>
+
+
+<section>
+{{# md}}
+## Recipes
+
+Since `mobile-angular-ui` exposes low level primitives to create components the following is a list of snippets to create most common components for an UI.
+
+You can easily implement your own or invent different ones. As you will notice they will be just html snippets, similar to what you could achieve with an higher level css+js framework like Bootstrap, jquery Mobile etc. 
+
+{{doc '1.2/recipes/tabs' }}
+<hr>
+
+{{doc '1.2/recipes/accordion' }}
+<hr>
+
+{{doc '1.2/recipes/dropdowns' }}
+<hr>
+
+{{doc '1.2/recipes/segmented-navigation' }}
+
+
+{{/md}}
+</section>
+
 
 </div>

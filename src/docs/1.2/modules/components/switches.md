@@ -1,4 +1,4 @@
-#### Toggle Switch
+### Toggle Switch
 
 <figure class="full-width-figure">
   <img src="/assets/img/figs/switch.png" alt=""/>

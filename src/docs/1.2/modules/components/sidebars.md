@@ -1,6 +1,6 @@
-#### Sidebars
+### Sidebars
 
-##### Creating sidebars
+#### Creating sidebars
 
 Sidebars can be placed either in left side or right side adding respectively `.sidebar-left` and `.sidebar-right` classes.
 
@@ -24,7 +24,7 @@ Sidebars can be placed either in left side or right side adding respectively `.s
 </div>
 ```
 
-##### Interacting with sidebars
+#### Interacting with sidebars
 
 Under the hood sidebar uses `SharedState` exposing respective statuses: `uiSidebarLeft` and `uiSidebarRight`
 

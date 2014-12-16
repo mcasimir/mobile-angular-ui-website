@@ -1,4 +1,4 @@
-### Core
+## Core
 
 <div class="h5">Stand alone usage</div>
 
