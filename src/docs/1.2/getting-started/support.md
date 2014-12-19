@@ -23,6 +23,7 @@ transitions and transforms should fit:
 - IE Mobile
 - Opera/Opera Mobile
 - IE10+
+- IEMobile 10+
 
 **Note n.1**: Some visual effects may be only available in some of the browsers above (ie. blur effect in overlays). A decent fallback is provided in any case.
 
@@ -36,3 +37,8 @@ transitions and transforms should fit:
 **Note n.3**: Currently some experimental features like those from `gestures` module are not supported by all of the browsers above, hopefully support will be the broadest possibile as these features will stabilize.
 
 **Note n.4**: If you notice frozen application on older devices be aware that this may be mainly due to device resources scarcity and not due to your application or framework you are using. If you have to forcefully support them try to lower your application footprint as much as you can.
+
+See also:
+ 
+ - http://getbootstrap.com/getting-started/#support
+ - https://docs.angularjs.org/guide/ie
