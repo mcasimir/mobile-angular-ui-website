@@ -16,9 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.1.1",
-    "jquery": "1.9.0",
-    "fontawesome": "~4.1.0",
+    "font-awesome": "4",
+    "bootstrap": "3",
+    "jquery": "1.9",
     "roboto-fontface": "~0.1.5",
     "mobile-angular-ui": "~1.2.0"
   }

@@ -1,0 +1,5 @@
+{
+  "plugins": [
+    "docs/docgen/jsdoc-plugins"
+  ]
+}
