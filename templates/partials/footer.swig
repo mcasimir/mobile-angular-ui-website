@@ -12,10 +12,16 @@
       </ul>
     </p>
     <p>
-      Website and docs are published under the
+      Published under the 
       <a
         href="https://raw.githubusercontent.com/mcasimir/mobile-angular-ui/master/LICENSE"
-      >MIT license</a>.
+      >MIT license</a>
     </p>
   </div>
 </footer>
+{% include "./analytics.swig" %}
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

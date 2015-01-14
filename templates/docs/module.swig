@@ -1,8 +1,4 @@
-{% extends './layout.swig' %}
-
-{% block heading %}
-<a href="https://github.com/mcasimir/mobile-angular-ui/blob/master/{{node.src}}" target='blank' class="btn btn-default pull-right"><i class="fa fa-pencil"></i> Source</a>
-{% endblock %}
+{% extends '../layout.swig' %}
 
 {% block contents %}
 {{ node.description | marked }}
