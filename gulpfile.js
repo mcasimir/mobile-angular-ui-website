@@ -16,6 +16,7 @@ var gulp              = require('gulp'),
     uglify            = require('gulp-uglify'),
     csso              = require('gulp-csso'),
     frontMatter       = require('gulp-front-matter'),
+    _                 = require('lodash'),
     bower             = require('bower'),
     htmlmin           = require('gulp-htmlmin'),
     deploy            = require('gulp-gh-pages'),
@@ -151,21 +152,6 @@ gulp.task('gen', function() {
   return gulp.src('home.md', {cwd: 'contents/pages'})
       .pipe(yfm())
       .pipe(tree.root({ type: 'home', slug: '' })) // creates a tree for each file
-      
-      .pipe(tree.append(
-        docgen('bower_components/mobile-angular-ui/src/js', 
-          {
-            cwd: 'bower_components/mobile-angular-ui/'
-          }
-        ), 
-        { 
-          data: {
-            title: config.title + ' Docs', 
-            slug: 'docs',
-            template: 'docs/doc.swig'
-          }
-        }
-      ))
 
       .pipe(tree.append(
           gulp.src(['**', '!home.md'], {cwd: 'contents/pages'})
@@ -173,6 +159,20 @@ gulp.task('gen', function() {
           { data: { type: 'page' } }
         )
       )
+
+      .pipe(tree.append(
+        docgen('bower_components/mobile-angular-ui/src/js', 
+          {
+            cwd: 'bower_components/mobile-angular-ui/'
+          }
+        ), 
+        { 
+          parent: '/docs',
+          data: {
+            template: 'docs/doc.swig'
+          }
+        }
+      ))
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/posts'})
@@ -205,10 +205,21 @@ gulp.task('gen', function() {
         )
       )
 
+      .pipe(require('./lib/through').fn(function(stream, obj, done) {
+
+        obj.traverse(function(child) {
+          child.children = _.sortBy(child.children, ['position','ngdoc', 'name']);
+        });
+
+        stream.push(obj);
+        done();
+      }))
+
       .pipe(render({
         cwd: path.resolve(__dirname, 'templates'),
         allow: function(node) {
-          return ['module',
+          return node.published !== false && [
+                  'module',
                   'guide',
                   'tutorial',
                   'page',
@@ -217,7 +228,9 @@ gulp.task('gen', function() {
                   'app'].indexOf(node.type) !== -1;
         },
         context: function(node) {
-          return { node: node, config: config, version: VERSION };
+          return { node: node, config: config, version: VERSION, inspect: function(obj) {
+            require('util').inspect(obj);
+          } };
         }
       }))
       .pipe(htmlmin({

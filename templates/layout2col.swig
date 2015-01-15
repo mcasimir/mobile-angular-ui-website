@@ -9,9 +9,7 @@
 
       <div class="row">
         <aside class="col-sm-3 sidebar-container" role="aside">
-          
-          <ul class="toc sidebar nav" id="toc">
-          </ul>
+          {% block aside %}{% endblock %}
         </aside>
         <div class="content col-sm-9" role="main">
           <div class="page-header">

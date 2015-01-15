@@ -27,7 +27,7 @@
     "slug": "^0.8.0",
     "swig": "^1.4.2",
     "swig-marked": "0.0.1",
-    "swig-traverse": "^1.0.1"
+    "swig-traverse": "^1.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

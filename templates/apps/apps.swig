@@ -10,7 +10,7 @@
 </div>
 
 <div class="row text-center">
-  {% for child in node.children.value() %}
+  {% for child in node.children %}
     <div class="col-sm-3">
       <a href="{{ child.path }}" class="app-icon">
       <img src="{{child.icon}}" alt="{{child.title}}" class="app-icon-img">

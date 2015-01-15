@@ -3,7 +3,6 @@ title: "Biggo Mobile Template"
 created_at: 2014-10-11
 description: "Mobile template design for Biggo, SaaS site & shop builder platform."
 icon: "/assets/img/apps/biggo/icon.png"
-published: true
 ---
 
 Biggo is SaaS site & shop builder platform. They used Mobile Angular Ui to create this mobile template for shop and websites built with Biggo.

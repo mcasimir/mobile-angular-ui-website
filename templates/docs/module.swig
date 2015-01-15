@@ -1,7 +1,6 @@
 {% extends '../layout.swig' %}
 
 {% block contents %}
-{{ node.description | marked }}
 
 {% if node.hasDescendants({type: 'module'}) %}
 <h2 class='h4'>Submodules of <code>{{node.fullname}}</code></h2>

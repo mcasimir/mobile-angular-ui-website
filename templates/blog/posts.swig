@@ -5,7 +5,7 @@
 
 <ul class="list-unstyled">
   
-{% for post in node.children.value() %}
+{% for post in node.children %}
 
 <li>
   <article>

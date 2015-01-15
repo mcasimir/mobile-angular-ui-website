@@ -1,8 +1,10 @@
 {% extends '../layout2col.swig' %}
 
-{% block contents %}
+{% block aside %}
+{% include 'toc.swig' %}
+{% endblock %}
 
-<div class="alert alert-info"><i class='fa fa-warning'></i> This documentation is for the current version (v1.2). If you are looking for old v1.1 documentation you can find it <a href="/docs-v1.1">here</a>.</div>
+{% block contents %}
 
 <h2>Guides</h2>
 
