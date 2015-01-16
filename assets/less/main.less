@@ -64,10 +64,6 @@ img {
   }
 }
 
-.page-header {
-  margin-top: 0;
-}
-
 section {
   margin-bottom: @line-height-computed * 2;
 }
@@ -221,8 +217,30 @@ svg {
   }
 }
 
-#docs-page {
-  h2 {
-    .page-header;
+
+.breadcrumb {
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+#docs-contents, #page-contents {
+  h2, h3, h4, h5, h6 {
+    color: #444;
   }
+  .doc-anchor {
+    color: #444;
+    text-decoration: none;
+  }
+  .doc-anchor:hover {
+    text-decoration: none;
+    color: #666;
+    h2, h3, h4, h5, h6 {
+      color: #666;
+    }
+  }
+}
+
+.sidebar-container a.active {
+  font-weight: bold;
 }

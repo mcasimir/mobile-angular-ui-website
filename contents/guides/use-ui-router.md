@@ -1,5 +1,6 @@
 ---
 title: Making ui-router work with mobile angular ui
+position: 100
 ---
 
 If issuing `$stateChangeStart` and `$routeChangeStart` won't conflict with your app

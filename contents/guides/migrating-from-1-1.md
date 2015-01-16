@@ -2,10 +2,7 @@
 title: "Migrating to Mobile Angular UI 1.2"
 created_at: 2014-12-16
 description: "All you need to know to about the new Mobile Angular UI 1.2"
-kind: article
-toc: true
-comments: true
-published: true
+position: 20
 ---
 
 Mobile Angular 1.2 Beta is here with many improvements and fixes, but also with many breaking changes.

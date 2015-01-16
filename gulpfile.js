@@ -174,6 +174,7 @@ gulp.task('gen', function() {
         }
       ))
 
+
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/posts'})
               .pipe(yfm()),
@@ -194,14 +195,14 @@ gulp.task('gen', function() {
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/guides'})
               .pipe(yfm()),
-          { parent: '/docs', data: { type: 'guide' } }
+          { parent: '/docs', data: { type: 'guide', template: 'docs/doc.swig' } }
         )
       )
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/tutorials'})
               .pipe(yfm()),
-          { parent: '/docs', data: { type: 'tutorial' } }
+          { parent: '/docs', data: { type: 'tutorial', template: 'docs/doc.swig' } }
         )
       )
 
@@ -300,7 +301,7 @@ gulp.task('default', ['build','watch', 'connect']);
 gulp.task('sources', function(done) {
   if (process.env.ENV === 'development') {
     del('bower_components/mobile-angular-ui', function() {
-      gulp.src(['../master/src/js/**/*', 
+      gulp.src(['../master/src/js/**/*',
                 '../master/demo/**/*',
                 '../master/dist/**/*',
                 '../master/bower.json'], 

@@ -174,6 +174,18 @@ $(document).ready(function(){
     d3.select(self.frameElement).style("height", height + "px");    
   }
 
+
+  // Auto make links from h2+
+
+  $('#docs-contents, #page-contents').find('h2,h3,h4,h5,h6').each(function() {
+    var $elem = $(this);
+    var id = $elem.attr('id');
+    if (id) {
+      $elem.wrap('<a href="#' + id + '" class="doc-anchor"></a>');
+    }
+  });
+
+
 });
 
 // IEMobile fix

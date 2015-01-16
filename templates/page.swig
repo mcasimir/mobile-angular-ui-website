@@ -1,5 +1,7 @@
 {% extends 'layout.swig' %}
 
 {% block contents %}
-{{ node.contents | marked }}
+<div id="page-contents">
+  {{ node.contents | marked }}
+</div>
 {% endblock %}

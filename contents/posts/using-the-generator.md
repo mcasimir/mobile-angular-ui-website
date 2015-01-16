@@ -2,7 +2,7 @@
 title: "Your first Phonegap App with Mobile Angular Ui"
 created_at: 2014-07-31
 description: "A tutorial about starting a fresh mobile application using Phonegap and Mobile Angular Ui"
-kind: article
+as: tutorial
 toc: true
 comments: true
 published: true
