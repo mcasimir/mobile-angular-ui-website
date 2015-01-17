@@ -229,9 +229,19 @@ gulp.task('gen', function() {
                   'app'].indexOf(node.type) !== -1;
         },
         context: function(node) {
-          return { node: node, config: config, version: VERSION, inspect: function(obj) {
-            require('util').inspect(obj);
-          } };
+          return { 
+                  node: node,
+                  config: config,
+                  version: VERSION,
+                  _: require('lodash'),
+                  stripOptionParams: function(params) {
+                    return !params.filter ? params : params.filter(function(p) {
+                      return p.name.indexOf('.') === -1;
+                    });
+                  },
+                  inspect: require('util').inspect,
+                  path: path
+                };
         }
       }))
       .pipe(htmlmin({
