@@ -1,6 +1,10 @@
 {% extends '../layout2col.swig' %}
 
 {% block aside %}
+{% include 'menu.swig' %}
+{% endblock %}
+
+{% block toc %}
 {% include 'toc.swig' %}
 {% endblock %}
 

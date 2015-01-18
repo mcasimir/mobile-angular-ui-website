@@ -15,6 +15,7 @@ Unscheduled:
     ☐ Always specify module usage from supermodules
     ☐ Document all components
     ☐ Document all gestures
+    ❑ Improve directive rendering with synopsis
   ☐ Clean up unused less stuffs
   ☐ Clean up unused js stuffs
   ☐ Fix css for social counts in home 

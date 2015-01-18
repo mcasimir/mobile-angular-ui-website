@@ -24,6 +24,7 @@ var gulp              = require('gulp'),
     docgen            = require('./lib/gulp-docgen'),
     tree              = require('./lib/gulp-tree'),
     render            = require('./lib/render'),
+    toc               = require('./lib/toc'),
     yfm               = function() {
       return frontMatter({property: 'data'});
     };
@@ -138,7 +139,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp.src(GLOBS.js)
   .pipe(concat('main.js'))
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(gulp.dest('out/assets/js'))
   .pipe(connect.reload());
 });
@@ -233,6 +234,7 @@ gulp.task('gen', function() {
                   node: node,
                   config: config,
                   version: VERSION,
+                  slug: require('slug'),
                   _: require('lodash'),
                   stripOptionParams: function(params) {
                     return !params.filter ? params : params.filter(function(p) {
@@ -244,6 +246,10 @@ gulp.task('gen', function() {
                 };
         }
       }))
+      .pipe(toc({
+          container: '.content',
+          levels: ['h2', 'h3', 'h4']
+        }))
       .pipe(htmlmin({
         collapseWhitespace: true
       }))

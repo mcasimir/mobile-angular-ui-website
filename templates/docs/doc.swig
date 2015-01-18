@@ -32,14 +32,17 @@
 
 {% macro renderMember(child) %}
 <div class="doc-node doc-{{child.type}}">
-  {% set childType = child.type === 'function' && child.ngdoc !== 'directive' ? 'method' : child.type %}
-    <h4 id="{{child.parent.ngdoc || child.parent.type}}:{{ child.parent.slug }}/{{ child.type }}:{{ child.slug }}" class="doc-page-header">{{child.title}} <small>{{childType}} <small><i>in</i></small> {{child.parent.title}}</small></h4>
-    {% if childType === 'method' %}
+    <h3 data-toc-title="{{child.shortTitle || child.title}}"
+      class="h4 doc-page-header">
+      {{child.title}}<br>
+      <small>{{child.type}} 
+        <small><i>in</i></small> 
+        {{child.parent.title}}
+      </small>
+    </h3>
+    {% if child.type === 'method' %}
       {{renderMethodSynopsis(child.parent.title, child.title, child.params, child.returns)}}
     {% endif %}
-    
-
-
   {{ child.contents | marked }}
 
   {% if child.params && child.params.length %}
@@ -51,7 +54,7 @@
 {# renderChild #}
 {% macro renderChild(node) %}
   <div class="doc-node doc-{{node.ngdoc}}">
-    <h3 id='{{node.ngdoc}}:{{node.slug}}' class='page-header doc-page-header'>{{node.title}} <small>{{node.ngdoc}}</small></h3>
+    <h2 data-toc-title='{{node.shortTitle || node.title}}' class='page-header doc-page-header'>{{node.title}} <small>{{node.ngdoc}}</small></h2>
 
     {{ node.contents | marked }}
 
@@ -60,20 +63,24 @@
     {% endif %}
     
     {% set childEvents = _.where(node.children, {type: 'event'}); %}
-    {% set childMethods = _.where(node.children, {type: 'function'}); %}
+    {% set childMethods = _.where(node.children, {type: 'method'}); %}
 
     {% if childMethods.length %}
-      <h4 id='{{node.ngdoc}}:{{node.slug}}~Methods' class="page-header">Methods</h4>
+    <div>
+      <h3 data-toc-type='section' class="page-header">Methods</h3>
       {% for child in childMethods %}
         {{renderMember(child)}}
-      {% endfor %}
+      {% endfor %}      
+    </div>
     {% endif %}
 
     {% if childEvents.length %}
-      <h4 id='{{node.ngdoc}}:{{node.slug}}~Events' class="page-header">Events</h4>
+    <div>
+      <h3 data-toc-type='section' class="page-header">Events</h3>
       {% for child in childEvents %}
         {{renderMember(child)}}
       {% endfor %}
+    </div>
     {% endif %}
 
   </div>
@@ -81,8 +88,13 @@
 
 
 {% block aside %}
+{% include 'menu.swig' %}
+{% endblock %}
+
+{% block toc %}
 {% include 'toc.swig' %}
 {% endblock %}
+
 
 {% block contents %}
 <div id="docs-contents">
@@ -110,17 +122,28 @@
 {% endtraverse %}  
 </ul>
 {% else %}
+
+{% set childServices   = _.where(node.children, {ngdoc: 'service'}); %}
+{% set childDirectives = _.where(node.children, {ngdoc: 'directive'}); %}
+
+  {% if childServices.length %}
+  <h2 data-toc-type='section'>Services</h2>
   {% for child in node.children %}
       {% if child.ngdoc == 'service' %}
         {{renderChild(child)}}
       {% endif %}
-  {% endfor %}
+  {% endfor %}  
+  {% endif %}
 
+  {% if childDirectives.length %}
+  <h2 data-toc-type='section'>Directives</h2>
   {% for child in node.children %}
       {% if child.ngdoc == 'directive' %}
         {{renderChild(child)}}
       {% endif %}
   {% endfor %}
+  {% endif %}
+  
 {% endif %}
 </div>
 {% endblock %}

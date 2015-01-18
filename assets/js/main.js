@@ -44,7 +44,7 @@ $(document).ready(function(){
 
     $toc.affix({
       offset: {
-        top: 0,
+        top: $toc.offset().top,
         bottom: function(){ return $footer.outerHeight(true); }
       }
     });
@@ -53,9 +53,14 @@ $(document).ready(function(){
     // ScroolSpy replacement
     //
     var isActive = function(elem) {
+      elem = $(elem);
+      if (!elem.length) {
+        return false;
+      }
+
       var scrollTop = $(window).scrollTop();
       var elemTop = elem.offset().top;
-      if (elemTop < scrollTop + 400) {
+      if (elemTop < scrollTop + 100) {
         return true;
       };
       return false;
@@ -97,7 +102,7 @@ $(document).ready(function(){
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
       var href = this.href;
       var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      target = target.length ? target : $('[name=\'' + this.hash.slice(1) +'\']');
       if (target.length) {
         $('html,body').animate({
           scrollTop: target.offset().top - 70
@@ -108,72 +113,6 @@ $(document).ready(function(){
       }
     }
   });
-
-
-  //
-  // D3.js
-  //
-  if (d3 && $('#modules-overview-graph').length) {
-    var width = 600, height = 300;
-    var tree = d3.layout.tree()
-        .size([300, 300]);
-    var diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.y, d.x]; });
-    var svg = d3.select("#modules-overview-graph").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-      .append("g")
-        .attr("transform", "translate(120,0)");
-    var data = {
-     "name": "Mobile Angular UI",
-     "children": [
-        { name: 'Core', children: [
-        { name:'fastclick', children: [] },
-        { name:'activeLinks', children: [] },
-        { name:'capture', children: [] },
-        { name:'outerClick', children: [] },
-        { name:'sharedState', children: [] }
-      ] },
-      { name: 'Components', children: [
-        {name: 'modals', children: [] },
-        {name: 'sidebars', children: [] },
-        {name: 'navbars', children: [] },
-        {name: 'scrollable', children: [] },
-        {name: 'switch', children: [] }
-      ] },
-      { name: 'Gestures', children: [
-        { name: 'drag', children: [] },
-        { name: 'swipe', children: [] },
-        { name: 'transform', children: [] }
-      ] }
-     ]
-    };
-
-    var nodes = tree.nodes(data),
-        links = tree.links(nodes);
-
-    var link = svg.selectAll("path.link")
-        .data(links)
-      .enter().append("path")
-        .attr("class", "link")
-        .attr("d", diagonal);
-
-    var node = svg.selectAll("g.node")
-        .data(nodes)
-      .enter().append("g")
-        .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
-    node.append("circle")
-        .attr("r", 4.5);
-    node.append("text")
-        .attr("dx", function(d) { return d.children ? -8 : 8; })
-        .attr("dy", 3)
-        .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
-          .text(function(d) { return d.name; });
-
-    d3.select(self.frameElement).style("height", height + "px");    
-  }
-
 
   // Auto make links from h2+
 
