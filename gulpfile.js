@@ -139,7 +139,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp.src(GLOBS.js)
   .pipe(concat('main.js'))
-  //.pipe(uglify())
+  .pipe(uglify())
   .pipe(gulp.dest('out/assets/js'))
   .pipe(connect.reload());
 });
@@ -201,6 +201,13 @@ gulp.task('gen', function() {
       )
 
       .pipe(tree.append(
+          gulp.src('**', {cwd: 'contents/components'})
+              .pipe(yfm()),
+          { parent: '/docs', data: { type: 'component', template: 'docs/doc.swig' } }
+        )
+      )
+
+      .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/tutorials'})
               .pipe(yfm()),
           { parent: '/docs', data: { type: 'tutorial', template: 'docs/doc.swig' } }
@@ -227,6 +234,7 @@ gulp.task('gen', function() {
                   'page',
                   'home',
                   'post',
+                  'component',
                   'app'].indexOf(node.type) !== -1;
         },
         context: function(node) {
@@ -276,6 +284,9 @@ gulp.task('sitemap', function () {
 ===================================================================*/
 
 gulp.task('watch', function() {
+  if (process.env.ENV === 'dev') {
+    gulp.watch(['../master/src/**/*', '../master/demo/**/*'], ['sources', 'gen']);
+  }
   gulp.watch(['templates/**/*', 'contents/**/*'], ['gen']);
   gulp.watch(['assets/img/**/*'], ['img']);
   gulp.watch(['assets/less/**/*'], ['css']);
@@ -310,12 +321,12 @@ gulp.task('build', function(done){
 
 gulp.task('default', ['build','watch', 'connect']);
 
-/*==============================
-=            Bower             =
-==============================*/
+/*================================
+=            Sources             =
+================================*/
 
 gulp.task('sources', function(done) {
-  if (process.env.ENV === 'development') {
+  if (process.env.ENV === 'dev') {
     del('bower_components/mobile-angular-ui', function() {
       gulp.src(['../master/src/js/**/*',
                 '../master/demo/**/*',

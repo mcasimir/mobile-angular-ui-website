@@ -13,9 +13,11 @@ Unscheduled:
     ✔ generate tree @done (15-01-16 15:43)
     ✔ render tree @done (15-01-16 15:43)
     ☐ Always specify module usage from supermodules
-    ☐ Document all components
-    ☐ Document all gestures
+    ✔ Document all components @done (15-01-19 17:38)
+    ✔ Document all gestures @done (15-01-19 17:38)
     ❑ Improve directive rendering with synopsis
+    ❑ Handle deprecated
+    ❑ Handle returns
   ☐ Clean up unused less stuffs
   ☐ Clean up unused js stuffs
   ☐ Fix css for social counts in home 

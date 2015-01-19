@@ -11,11 +11,11 @@
 {% endmacro -%}
 
 {# paramsTable #}
-{% macro paramsTable(params) %}
+{% macro paramsTable(params, title) %}
 
 <table class='table table-params'>
   <thead>
-    <tr><th>Param</th><th>Type</th><th>Description</th></tr>
+    <tr><th>{{title || 'Param'}}</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
     {% for param in params %}
@@ -44,9 +44,24 @@
       {{renderMethodSynopsis(child.parent.title, child.title, child.params, child.returns)}}
     {% endif %}
   {{ child.contents | marked }}
-
+  
   {% if child.params && child.params.length %}
     {{paramsTable(child.params)}}
+  {% endif %}
+
+  {% if child.type === 'class' %}
+  <div>
+    {% if child.properties && child.properties.length %}
+      <div><b>Properties</b></div>
+      {{paramsTable(child.properties, 'Prop')}}
+    {% endif %}
+    {% if _.where(child.children, { type: 'method' }).length %}
+      <div><b>Methods</b></div>
+      {% for meth in _.where(child.children, { type: 'method' }) %}
+        {{renderMember(meth)}}
+      {% endfor %}
+    {% endif %}
+  </div>
   {% endif %}
 </div>
 {% endmacro %}
@@ -56,18 +71,34 @@
   <div class="doc-node doc-{{node.ngdoc}}">
     <h2 data-toc-title='{{node.shortTitle || node.title}}' class='page-header doc-page-header'>{{node.title}} <small>{{node.ngdoc}}</small></h2>
 
+    <ul>
+      {% for item in node.children %}
+        <li>{{item.title}} - {{item.type}}</li>
+      {% endfor %}
+    </ul>
+
     {{ node.contents | marked }}
 
     {% if node.params && node.params.length %}
       {{paramsTable(node.params)}}
     {% endif %}
     
-    {% set childEvents = _.where(node.children, {type: 'event'}); %}
-    {% set childMethods = _.where(node.children, {type: 'method'}); %}
+    {% set childEvents    = _.where(node.children, { type:   'event'    }); %}
+    {% set childMethods   = _.where(node.children, { type:   'method'   }); %}
+    {% set childProviders = _.where(node.children, { ngdoc:  'provider' }); %}
+    {% set childTypes     = _.where(node.children, { ngdoc:  'type'     }); %}
+    
+    {% if childProviders.length %}
+      <h3 data-toc-title="Provider" data-toc-type='section' class="h4 page-header">Provider <small><i>in</i> {{node.shortTitle}}</small></h3>
+
+      {% for child in childProviders %}
+        {{renderMember(childProviders[0])}}
+      {% endfor %}
+    {% endif %}
 
     {% if childMethods.length %}
     <div>
-      <h3 data-toc-type='section' class="page-header">Methods</h3>
+      <h3 data-toc-title="Methods" data-toc-type='section' class="h4 page-header">Methods <small><i>in</i> {{node.shortTitle}}</small></h3>
       {% for child in childMethods %}
         {{renderMember(child)}}
       {% endfor %}      
@@ -76,8 +107,17 @@
 
     {% if childEvents.length %}
     <div>
-      <h3 data-toc-type='section' class="page-header">Events</h3>
+      <h3 data-data-toc-title="Events" toc-type='section' class="h4 page-header">Events <small><i>in</i> {{node.shortTitle}}</small></h3>
       {% for child in childEvents %}
+        {{renderMember(child)}}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if childTypes.length %}
+    <div>
+      <h3 data-toc-title="Types" data-toc-type='section' class="h4 page-header">Types <small><i>in</i> {{node.shortTitle}}</small></h3>
+      {% for child in childTypes %}
         {{renderMember(child)}}
       {% endfor %}
     </div>
@@ -127,7 +167,7 @@
 {% set childDirectives = _.where(node.children, {ngdoc: 'directive'}); %}
 
   {% if childServices.length %}
-  <h2 data-toc-type='section'>Services</h2>
+  <h2 data-toc-type='section' class='h3 page-header'>Services</h2>
   {% for child in node.children %}
       {% if child.ngdoc == 'service' %}
         {{renderChild(child)}}
@@ -136,7 +176,7 @@
   {% endif %}
 
   {% if childDirectives.length %}
-  <h2 data-toc-type='section'>Directives</h2>
+  <h2 data-toc-type='section' class='h3 page-header'>Directives</h2>
   {% for child in node.children %}
       {% if child.ngdoc == 'directive' %}
         {{renderChild(child)}}
