@@ -78,7 +78,7 @@ Are always displayed unless you don't do anything.
 
 Read [Differences with Bootstrap 3](/docs/getting-started/#differences-with-bootstrap-3) for more.
 
-#### Layout concerns
+#### Layout
 
 Looking to `demo/index.html` will give you a complete picture of how a Mobile Angular UI application layout is structured.
 
@@ -86,7 +86,7 @@ It is very close to any Bootstrap layout. But you may notice some special setup 
 
 Read [Basic Layout](/docs/getting-started/#basic-layout) for more.
 
-#### Scroll the way mobile does
+#### Scroll
 
 In Mobile Angular UI global scroll is disabled completely. This way your life will be easier to handle multi-col scroll and fixed navbars.
 
@@ -102,15 +102,13 @@ It provides a way to move or clone a block of markup to other parts of the docum
 
 `content-for/yield-to` behaviour is inspired by [Ruby On Rails equivalents](http://guides.rubyonrails.org/layouts_and_rendering.html#understanding-yield), but bear in mind that in Mobile Angular UI those directives do not append: they replaces. 
 
-#### One service to rule them all
+#### SharedState service and ui-* directives
 
 Mobile Angular UI components are not limited to an enumeration of hundred of directives you'd have to learn and remember.
 
 Unlike many other UI framework you will create most of the components all in the same way. 
 
 This will give you the maximum flexibility to customize the behaviour of your app and widgets without the need to learn different syntax neither having to write js code your own.
-
-##### The SharedState service
 
 Anyone started developing with `angular.js` has been tempted to do something like this:
 
@@ -166,3 +164,23 @@ Mobile Angular UI offers you a more generic and managed way to do that: `SharedS
 Looking at docs and other section of demo you should be able to figure out how to recreate most common components like: accordions, tabs, dropdowns and more using `ui-*` directives.
 
 See `demo/toggle.html` and [SharedState docs](/docs/module:mobile-angular-ui/module:core/module:sharedstate/) for more.
+
+### Gestures and Touch
+
+Mobile Angular Ui aims to solve most of common problems while developing with html on mobile devices.
+
+By just requiring `mobile-angular-ui` as a dependency for your app you will get:
+
+- reliable and fast touch-scroll polyfill
+- Fastclick
+- nobounce hack for IOS
+
+Please note that `ngTouch` as is now, it is not your best option to deal with mobile developement and angular.js.
+
+Mobile Angular Ui offers services to support touch enabled devices at best, and they has a similar interface to `ngTouch` one so you can use it as a drop in replacement.
+
+The `mobile-angular-ui.gestures` module has powerfull directives and services to support `touch`, `swipe` and `drag` gestures, and it does not need any `.css` to work.
+
+Just see how simple it is to create an Android clock like widget:
+
+<iframe src="/examples/clock.html" class='embedded-example'></iframe>

@@ -34,6 +34,20 @@
   {% endtraverse -%}
   </ul>
 
+  <h3>Components</h3>
+
+  <ul>
+  {% for child in node.root.find('/docs').children %}
+    {% if child.type == 'component' %}
+    <li>
+    <a 
+      {% if node.path == child.path %}class='active'{% endif %} 
+      href="{{child.path}}">{{child.title | title}}</a>
+    </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+
   <h3>API Docs</h3>
 
   <ul>

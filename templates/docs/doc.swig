@@ -107,7 +107,7 @@
 
     {% if childEvents.length %}
     <div>
-      <h3 data-data-toc-title="Events" toc-type='section' class="h4 page-header">Events <small><i>in</i> {{node.shortTitle}}</small></h3>
+      <h3 data-toc-title="Events" data-toc-type='section' class="h4 page-header">Events <small><i>in</i> {{node.shortTitle}}</small></h3>
       {% for child in childEvents %}
         {{renderMember(child)}}
       {% endfor %}
@@ -186,4 +186,6 @@
   
 {% endif %}
 </div>
+
+{% include '../partials/comments.swig' %}
 {% endblock %}

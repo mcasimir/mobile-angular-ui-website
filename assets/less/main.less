@@ -332,3 +332,50 @@ pre.synopsis::before {
     text-transform: none;
   }
 }
+
+.embedded-example {
+  display: none;
+}
+
+.embedded-example-container {
+  position: relative;
+  width: 400px;
+}
+
+.embedded-example-container > .btn {
+  position: absolute;
+  top: 2px;
+  right: 7px;
+}
+
+.embedded-example-container > .embedded-example {
+  display: block;
+  border: 2px solid #444;
+  border-radius: 6px;
+  padding: 26px 4px 40px;
+  margin-bottom: 22px;
+  background: #666;
+}
+
+.modal-example-code {
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border-top: 0;
+    padding-bottom: 11px;
+  }
+  .modal-dialog {
+    width: 100%;
+    max-width: 820px;
+  }
+  .modal-body {
+    padding: 0;
+    >pre {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.modal-backdrop {
+  position: fixed
+}

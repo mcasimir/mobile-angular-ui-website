@@ -14,7 +14,7 @@ var gulp              = require('gulp'),
     fs                = require('fs'),
     seq               = require('run-sequence'),
     uglify            = require('gulp-uglify'),
-    csso              = require('gulp-csso'),
+    cssmin            = require('gulp-cssmin'),
     frontMatter       = require('gulp-front-matter'),
     _                 = require('lodash'),
     bower             = require('bower'),
@@ -25,6 +25,7 @@ var gulp              = require('gulp'),
     tree              = require('./lib/gulp-tree'),
     render            = require('./lib/render'),
     toc               = require('./lib/toc'),
+    examples          = require('./lib/examples'),
     yfm               = function() {
       return frontMatter({property: 'data'});
     };
@@ -50,6 +51,7 @@ GLOBS.vendorLess            = [
 GLOBS.js = ['jquery/jquery.js',
             'bootstrap/js/affix.js',
             'bootstrap/js/carousel.js',
+            'bootstrap/js/tab.js',
             'bootstrap/js/transition.js',
             'bootstrap/js/collapse.js',
             'bootstrap/js/modal.js' ].map(function(lib) {
@@ -123,7 +125,7 @@ gulp.task('css', function() {
 
   return gulp.src('assets/less/main.less')
   .pipe(less({paths: GLOBS.vendorLess}))
-  .pipe(csso())
+  .pipe(cssmin())
   .pipe(gulp.dest('out/assets/css'))
   .pipe(connect.reload())
   .on('error', function(e) {
@@ -148,7 +150,7 @@ gulp.task('js', function() {
 =            Docs            =
 ============================*/
 
-gulp.task('gen', function() {
+gulp.task('gen', ['demo', 'examples', 'version'], function() {
 
   return gulp.src('home.md', {cwd: 'contents/pages'})
       .pipe(yfm())
@@ -285,7 +287,7 @@ gulp.task('sitemap', function () {
 
 gulp.task('watch', function() {
   if (process.env.ENV === 'dev') {
-    gulp.watch(['../master/src/**/*', '../master/demo/**/*'], ['sources', 'gen']);
+    gulp.watch(['../master/src/**/*', '../master/demo/**/*', '../master/examples/**/*'], ['sources', 'gen']);
   }
   gulp.watch(['templates/**/*', 'contents/**/*'], ['gen']);
   gulp.watch(['assets/img/**/*'], ['img']);
@@ -302,6 +304,12 @@ gulp.task('demo', ['sources'], function(){
       .pipe(gulp.dest('out'));
 });
 
+gulp.task('examples', ['sources'], function(){
+  return gulp.src(['bower_components/mobile-angular-ui/examples/**/*'], {base: 'bower_components/mobile-angular-ui/'})
+      .pipe(examples())
+      .pipe(gulp.dest('out'));
+});
+
 gulp.task('version', ['sources'], function(){
   var bowerJson = JSON.parse(fs.readFileSync('bower_components/mobile-angular-ui/bower.json', {encoding: 'utf8'}));
   VERSION = bowerJson.version;
@@ -312,7 +320,7 @@ gulp.task('version', ['sources'], function(){
 ======================================*/
 
 gulp.task('build', function(done){
-  seq(['clean', 'sources'], ['demo', 'version'], ['img', 'css', 'fonts',  'js', 'gen'], 'sitemap', done);
+  seq(['clean', 'sources'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen'], 'sitemap', done);
 });
 
 /*====================================
@@ -330,8 +338,9 @@ gulp.task('sources', function(done) {
     del('bower_components/mobile-angular-ui', function() {
       gulp.src(['../master/src/js/**/*',
                 '../master/demo/**/*',
+                '../master/examples/**/*',
                 '../master/dist/**/*',
-                '../master/bower.json'], 
+                '../master/bower.json'],
                 {base: '../master'})
           .pipe(gulp.dest('bower_components/mobile-angular-ui'))
           .on('end', function() {
