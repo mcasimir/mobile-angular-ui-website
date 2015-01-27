@@ -157,7 +157,7 @@ $(document).ready(function(){
       
       for (i = 0; i < manifest.tabs.length; i++) {
         tab = manifest.tabs[i];
-        modal += '<li class="' + (i === 0 ? 'active' : '') + '"><a data-toggle="tab" href="#modal-example-code-tab-' + i + '">' + tab.type.toUpperCase() + '</a></li>';
+        modal += '<li class="' + (i === 0 ? 'active' : '') + '"><a href="#modal-example-code-tab-' + i + '">' + tab.type.toUpperCase() + '</a></li>';
       }
       
       modal +=  '        </ul>' +
@@ -187,7 +187,7 @@ $(document).ready(function(){
 
     modal.show();
     modal.modal();
-    modal.on('hidden', function() {
+    modal.on('hidden.bs.modal', function() {
       modal.remove();
     });
   };

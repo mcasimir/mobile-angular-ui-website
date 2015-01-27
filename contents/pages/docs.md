@@ -11,9 +11,7 @@ template: docs/docs.swig
 
 Mobile Angular UI lets you create HTML5 hybrid mobile apps and desktop apps with twitter Bootstrap and Angular JS.
 
-What follows is a walk through documentation concepts. Keeping to read sections below should give you an overview of what you'll need to get familiar with in order to master Mobile Angular UI.
-
-I encourage you to continue reading this and then go on with the more detailed [getting started guide](http://localhost:3002/docs/getting-started).
+What follows is a walk through documentation. I strongly encourage you to continue reading this and then go on with the more detailed [Getting Started Guide](/docs/getting-started).
 
 ### Learning by Examples
 
@@ -35,7 +33,7 @@ Mobile Angular UI redistributes parts of Twitter Boostrap css. Bootstrap stylesh
 - `mobile-angular-ui-hover.css`: Hover rules
 - `mobile-angular-ui-desktop.css`: Desktop rules
 
-This way you will be able to include only what you need to target your devices.
+This way you will be able to include only what you need in order to target your devices.
 
 #### JS
 
@@ -92,11 +90,11 @@ In Mobile Angular UI global scroll is disabled completely. This way your life wi
 
 To make scrollable contents you will use [Scrollable Areas](/docs/module:mobile-angular-ui/module:components/module:scrollable).
 
-#### Master/Details without headhakes
+#### Moving markup
 
 [Capture module](/docs/module:mobile-angular-ui/module:core/module:capture/) exposes services and directives that will help you to reproduce master/details pattern.
 
-The capture module exposes directives to let you extract markup which can be used in other parts of a template using uiContentFor and uiYieldTo directives.
+The capture module exposes directives to let you extract markup which can be used in other parts of a template using `uiContentFor` and `uiYieldTo` directives.
 
 It provides a way to move or clone a block of markup to other parts of the document.
 
@@ -169,15 +167,15 @@ See `demo/toggle.html` and [SharedState docs](/docs/module:mobile-angular-ui/mod
 
 Mobile Angular Ui aims to solve most of common problems while developing with html on mobile devices.
 
-By just requiring `mobile-angular-ui` as a dependency for your app you will get:
+By just requiring `mobile-angular-ui` as a dependency for your app you will get already:
 
 - reliable and fast touch-scroll polyfill
 - Fastclick
-- nobounce hack for IOS
+- nobounce / touchmove default prevention hacks
 
-Please note that `ngTouch` as is now, it is not your best option to deal with mobile developement and angular.js.
+Please note that `ngTouch` as it is now will not play well with Mobile Angular UI, especially with fastclick.js.
 
-Mobile Angular Ui offers services to support touch enabled devices at best, and they has a similar interface to `ngTouch` one so you can use it as a drop in replacement.
+Mobile Angular Ui offers services to support touch enabled devices at best, and they has an interface similar to `ngTouch` so you can use it as a drop in replacement.
 
 The `mobile-angular-ui.gestures` module has powerfull directives and services to support `touch`, `swipe` and `drag` gestures, and it does not need any `.css` to work.
 
