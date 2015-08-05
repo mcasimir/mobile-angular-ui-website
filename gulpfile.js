@@ -1,5 +1,5 @@
 // JSHint stuffs:
-/* global console: false, __dirname: false */
+/* global console, __dirname, JSON */
 
 /*========================================
 =            Requiring stuffs            =
@@ -41,11 +41,11 @@ var config = require('./config');
 =============================*/
 
 var GLOBS = {};
-GLOBS.fonts                 = ['bower_components/font-awesome/fonts/fontawesome-webfont.*', 
+GLOBS.fonts                 = ['bower_components/font-awesome/fonts/fontawesome-webfont.*',
                                'bower_components/roboto-fontface/fonts/*'];
-GLOBS.vendorLess            = [ 
-  path.resolve(__dirname, 'src/less'), 
-  path.resolve(__dirname, 'bower_components') 
+GLOBS.vendorLess            = [
+  path.resolve(__dirname, 'src/less'),
+  path.resolve(__dirname, 'bower_components')
 ];
 
 GLOBS.js = ['jquery/jquery.js',
@@ -56,10 +56,10 @@ GLOBS.js = ['jquery/jquery.js',
             'bootstrap/js/collapse.js',
             'bootstrap/js/modal.js' ].map(function(lib) {
               return 'bower_components/' + lib;
-            }).concat([ 
+            }).concat([
             'assets/js/expo.js',
             'assets/js/forum.js',
-            'assets/js/main.js' 
+            'assets/js/main.js'
             ]);
 
 var VERSION;
@@ -164,12 +164,12 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
       )
 
       .pipe(tree.append(
-        docgen('bower_components/mobile-angular-ui/src/js', 
+        docgen('bower_components/mobile-angular-ui/src/js',
           {
             cwd: 'bower_components/mobile-angular-ui/'
           }
-        ), 
-        { 
+        ),
+        {
           parent: '/docs',
           data: {
             template: 'docs/doc.swig'
@@ -181,7 +181,7 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/posts'})
               .pipe(yfm()),
-          { parent: '/blog', data: { 
+          { parent: '/blog', data: {
             type: 'post',
             template: 'blog/post.swig'
           } }
@@ -240,7 +240,7 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
                   'app'].indexOf(node.type) !== -1;
         },
         context: function(node) {
-          return { 
+          return {
                   node: node,
                   config: config,
                   version: VERSION,
@@ -273,7 +273,7 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
 ===============================*/
 
 gulp.task('sitemap', function () {
-    gulp.src('out/**/*.html')
+    return gulp.src('out/**/*.html')
         .pipe(sitemap({
             siteUrl: config.host,
             lastmod: false
@@ -315,19 +315,24 @@ gulp.task('version', ['sources'], function(){
   VERSION = bowerJson.version;
 });
 
+gulp.task('public', function(){
+  return gulp.src(['public/**/*'], {base: 'public/'})
+    .pipe(gulp.dest('out'));
+});
+
 /*======================================
 =            Build Sequence            =
 ======================================*/
 
 gulp.task('build', function(done){
-  seq(['clean', 'sources'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen'], 'sitemap', done);
+  seq(['clean', 'sources'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen', 'public'], 'sitemap', done);
 });
 
 /*====================================
 =            Default Task            =
 ====================================*/
 
-gulp.task('default', ['build','watch', 'connect']);
+gulp.task('default', ['build', 'watch', 'connect']);
 
 /*================================
 =            Sources             =
@@ -346,7 +351,7 @@ gulp.task('sources', function(done) {
           .on('end', function() {
             console.log('Mobile Angular UI bower Updated');
             done();
-          });      
+          });
     });
   } else {
     bower.commands.update(['mobile-angular-ui']).on('end', function () {
@@ -360,7 +365,11 @@ gulp.task('sources', function(done) {
 =            Deploy            =
 ==============================*/
 
-gulp.task('deploy', ['clean', 'bower'], function () {
-    return gulp.src('out/**/*')
-      .pipe(deploy({ remoteUrl: 'git@github.com:mcasimir/mobile-angular-ui.git' }));
+gulp.task('_do_deploy', function(){
+  return gulp.src('out/**/*')
+    .pipe(deploy({ remoteUrl: 'git@github.com:mcasimir/mobile-angular-ui.git' }));
+});
+
+gulp.task('deploy', function (done) {
+  seq('build', '_do_deploy', done );
 });

@@ -84,6 +84,7 @@ pids
 logs
 results
 out
+out.zip
 
 npm-debug.log
 node_modules

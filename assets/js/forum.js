@@ -6,19 +6,6 @@ $(document).ready(function(){
     '<a href="" id="dont-bother-again" class="btn btn-default">Ok. Got it</a>' +
     '</div>';
 
-
-    // if (!$.cookie('hideMauiForumIssueNotice')) {
-    //   var alertEl = $(alertHtml);
-    //   $('#forum').prepend(alertEl);
-    //
-    //   $('#dont-bother-again').click(function(e){
-    //     alertEl.remove();
-    //     $.cookie('hideMauiForumIssueNotice', true, { expires: (365 * 30) });
-    //     e.preventDefault();
-    //     return false;
-    //   });
-    // }
-
     document.getElementById('loading-forum-txt').appendChild( document.createTextNode("Loading Forum ...") );
     function hideLoading() {
       var loadingEl = document.getElementById('loading');

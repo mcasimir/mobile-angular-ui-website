@@ -12,14 +12,13 @@
       </ul>
     </p>
     <p>
-      Published under the 
+      Published under the
       <a
         href="https://raw.githubusercontent.com/mcasimir/mobile-angular-ui/master/LICENSE"
       >MIT license</a>
     </p>
   </div>
 </footer>
-{% include "./analytics.swig" %}
     <script src="/assets/js/main.js"></script>
   </body>
 </html>

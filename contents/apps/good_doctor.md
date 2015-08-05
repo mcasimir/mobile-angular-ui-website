@@ -19,7 +19,7 @@ Display doctor's infomation who worked in hospital of Chengdu and Recommended by
   <dt>Author</dt>
   <dd>Chengdu Economic Daily</dd>
   <dt>Developers</dt>
-  <dd>Welpher Yu(http://blog.ueder.info), Yao yuqi</dd>
+  <dd>[Welpher Yu](http://blog.ueder.info), Yao yuqi</dd>
   <dt>Designers</dt>
   <dd>Zeng qiao</dd>
 </dl>

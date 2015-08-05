@@ -2,11 +2,13 @@
 
 {% block contents %}
 
-<div class="alert">
-  Made an app with mobile angular UI? Let everyone know!
-  <button class="btn btn-primary pull-right btn-submit-your-app" data-toggle="modal" data-target="#myModal">
-    Submit your App <i class="fa fa-chevron-right"></i>
-  </button>
+<div class="alert alert-info">
+  <div class="row">
+    <div class="col-sm-9"><div class="btn-padding">Made an app with mobile angular UI? Let everyone know!</div></div>
+    <div class="col-sm-3 text-right"><button class="btn btn-primary btn-submit-your-app" data-toggle="modal" data-target="#myModal">
+      Submit your App
+    </button></div>
+  </div>
 </div>
 
 <div class="row text-center">
@@ -14,7 +16,7 @@
     <div class="col-sm-3">
       <a href="{{ child.path }}" class="app-icon">
       <img src="{{child.icon}}" alt="{{child.title}}" class="app-icon-img">
-      <h3 class="app-icon-title">{{child.title}}</h3>
+      <h3 class="app-icon-title h5">{{child.title}}</h3>
       </a>
     </div>
   {% endfor %}
@@ -56,4 +58,3 @@ Optional:
 </div>
 
 {% endblock %}
-
