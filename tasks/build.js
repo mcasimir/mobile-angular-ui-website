@@ -5,7 +5,6 @@ var connect           = require('gulp-connect');
 var del               = require('del');
 var less              = require('gulp-less');
 var path              = require('path');
-var fs                = require('fs');
 var seq               = require('run-sequence');
 var uglify            = require('gulp-uglify');
 var cssmin            = require('gulp-cssmin');
@@ -258,7 +257,7 @@ module.exports = function(gulp, config) {
   =            Demo            =
   ============================*/
 
-  gulp.task('demo', ['sources'], function() {
+  gulp.task('demo', [], function() {
     return gulp.src([
       'node_modules/mobile-angular-ui/demo/**/*',
       'node_modules/mobile-angular-ui/dist/**/*'
@@ -266,15 +265,15 @@ module.exports = function(gulp, config) {
         .pipe(gulp.dest('out'));
   });
 
-  gulp.task('examples', ['sources'], function() {
+  gulp.task('examples', [], function() {
     return gulp.src(['node_modules/mobile-angular-ui/examples/**/*'], {base: 'node_modules/mobile-angular-ui/'})
         .pipe(examples())
         .pipe(gulp.dest('out'));
   });
 
-  gulp.task('version', ['sources'], function() {
-    var bowerJson = JSON.parse(fs.readFileSync('node_modules/mobile-angular-ui/bower.json', {encoding: 'utf8'}));
-    VERSION = bowerJson.version;
+  gulp.task('version', [], function() {
+    VERSION = require('../package').dependencies['mobile-angular-ui'];
+    console.log('VERSION', VERSION);
   });
 
   gulp.task('public', function() {
@@ -286,8 +285,8 @@ module.exports = function(gulp, config) {
   =            Build Sequence            =
   ======================================*/
 
-  gulp.task('build', function(done) {
-    seq(['clean', 'sources'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen', 'public'], 'sitemap', done);
+  gulp.task('build', ['sources'], function(done) {
+    seq(['clean'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen', 'public'], 'sitemap', done);
   });
 
   /*====================================
