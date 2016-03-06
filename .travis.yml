@@ -1,6 +1,4 @@
 language: node_js
 node_js:
-  - "4"
-before_script:
-  - npm install -g gulp
-script: gulp test:ci
+  - "4.3.2"
+script: node_modules/.bin/gulp test:ci

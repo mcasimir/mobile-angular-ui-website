@@ -1,13 +1,8 @@
 {
-  "name": "Mobile-Angular-Ui-Website",
-  "version": "0.0.0",
+  "name": "mobile-angular-ui-website",
+  "version": "1.0.0",
   "description": "Mobile Angular Ui Website",
-  "author": "mcasimir",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mcasimir/mobile-angular-ui-website/issues"
-  },
-  "homepage": "https://github.com/mcasimir/mobile-angular-ui-website",
+  "main": "gulpfile.js",
   "dependencies": {
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
@@ -45,5 +40,24 @@
     "swig": "1.4.2",
     "swig-marked": "0.0.1",
     "swig-traverse": "1.0.2"
-  }
+  },
+  "engines" : {
+    "node" : ">=4.3.2"
+  },
+  "scripts": {
+    "test": "gulp test:ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcasimir/mobile-angular-ui-website.git"
+  },
+  "keywords": [
+    "mobile-angular-ui-website"
+  ],
+  "author": "mcasimir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcasimir/mobile-angular-ui-website/issues"
+  },
+  "homepage": "https://github.com/mcasimir/mobile-angular-ui-website#readme"
 }
