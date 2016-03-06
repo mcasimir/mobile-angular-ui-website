@@ -1,3 +1,5 @@
+'use strict';
+
 // JSHint stuffs:
 /* global console, __dirname, JSON */
 
@@ -5,30 +7,30 @@
 =            Requiring stuffs            =
 ========================================*/
 
-var gulp              = require('gulp'),
-    concat            = require('gulp-concat'),
-    connect           = require('gulp-connect'),
-    del               = require('del'),
-    less              = require('gulp-less'),
-    path              = require('path'),
-    fs                = require('fs'),
-    seq               = require('run-sequence'),
-    uglify            = require('gulp-uglify'),
-    cssmin            = require('gulp-cssmin'),
-    frontMatter       = require('gulp-front-matter'),
-    _                 = require('lodash'),
-    bower             = require('bower'),
-    htmlmin           = require('gulp-htmlmin'),
-    deploy            = require('gulp-gh-pages'),
-    sitemap           = require('gulp-sitemap'),
-    docgen            = require('./lib/gulp-docgen'),
-    tree              = require('./lib/gulp-tree'),
-    render            = require('./lib/render'),
-    toc               = require('./lib/toc'),
-    examples          = require('./lib/examples'),
-    yfm               = function() {
-      return frontMatter({property: 'data'});
-    };
+var gulp              = require('gulp');
+var concat            = require('gulp-concat');
+var connect           = require('gulp-connect');
+var del               = require('del');
+var less              = require('gulp-less');
+var path              = require('path');
+var fs                = require('fs');
+var seq               = require('run-sequence');
+var uglify            = require('gulp-uglify');
+var cssmin            = require('gulp-cssmin');
+var frontMatter       = require('gulp-front-matter');
+var _                 = require('lodash');
+var bower             = require('bower');
+var htmlmin           = require('gulp-htmlmin');
+var deploy            = require('gulp-gh-pages');
+var sitemap           = require('gulp-sitemap');
+var docgen            = require('./lib/gulp-docgen');
+var tree              = require('./lib/gulp-tree');
+var render            = require('./lib/render');
+var toc               = require('./lib/toc');
+var examples          = require('./lib/examples');
+var yfm               = function() {
+  return frontMatter({property: 'data'});
+};
 
 /*==============================
 =            Config            =
@@ -54,12 +56,12 @@ GLOBS.js = ['jquery/jquery.js',
             'bootstrap/js/tab.js',
             'bootstrap/js/transition.js',
             'bootstrap/js/collapse.js',
-            'bootstrap/js/modal.js' ].map(function(lib) {
+            'bootstrap/js/modal.js'].map(function(lib) {
               return 'bower_components/' + lib;
             }).concat([
-            'assets/js/expo.js',
-            'assets/js/forum.js',
-            'assets/js/main.js'
+              'assets/js/expo.js',
+              'assets/js/forum.js',
+              'assets/js/main.js'
             ]);
 
 var VERSION;
@@ -76,7 +78,7 @@ gulp.on('error', function(e) {
 =            Clean dest folder            =
 =========================================*/
 
-gulp.task('clean', function (cb) {
+gulp.task('clean', function(cb) {
   del(['out/**'], cb);
 });
 
@@ -97,11 +99,10 @@ gulp.task('connect', function() {
 =            Setup live reloading on source changes            =
 ==============================================================*/
 
-gulp.task('livereload', function () {
+gulp.task('livereload', function() {
   return gulp.src('out/**')
     .pipe(connect.reload());
 });
-
 
 /*===================================
 =            Copy assets            =
@@ -154,12 +155,12 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
 
   return gulp.src('home.md', {cwd: 'contents/pages'})
       .pipe(yfm())
-      .pipe(tree.root({ type: 'home', slug: '' })) // creates a tree for each file
+      .pipe(tree.root({type: 'home', slug: ''})) // creates a tree for each file
 
       .pipe(tree.append(
           gulp.src(['**', '!home.md'], {cwd: 'contents/pages'})
               .pipe(yfm()),
-          { data: { type: 'page' } }
+          {data: {type: 'page'}}
         )
       )
 
@@ -177,42 +178,41 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
         }
       ))
 
-
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/posts'})
               .pipe(yfm()),
-          { parent: '/blog', data: {
+          {parent: '/blog', data: {
             type: 'post',
             template: 'blog/post.swig'
-          } }
+          }}
         )
       )
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/apps'})
               .pipe(yfm()),
-          { parent: '/apps', data: { type: 'app' } }
+          {parent: '/apps', data: {type: 'app'}}
         )
       )
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/guides'})
               .pipe(yfm()),
-          { parent: '/docs', data: { type: 'guide', template: 'docs/doc.swig' } }
+          {parent: '/docs', data: {type: 'guide', template: 'docs/doc.swig'}}
         )
       )
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/components'})
               .pipe(yfm()),
-          { parent: '/docs', data: { type: 'component', template: 'docs/doc.swig' } }
+          {parent: '/docs', data: {type: 'component', template: 'docs/doc.swig'}}
         )
       )
 
       .pipe(tree.append(
           gulp.src('**', {cwd: 'contents/tutorials'})
               .pipe(yfm()),
-          { parent: '/docs', data: { type: 'tutorial', template: 'docs/doc.swig' } }
+          {parent: '/docs', data: {type: 'tutorial', template: 'docs/doc.swig'}}
         )
       )
 
@@ -267,16 +267,15 @@ gulp.task('gen', ['demo', 'examples', 'version'], function() {
       .pipe(connect.reload());
 });
 
-
 /*===============================
 =            Sitemap            =
 ===============================*/
 
-gulp.task('sitemap', function () {
-    return gulp.src('out/**/*.html')
+gulp.task('sitemap', function() {
+  return gulp.src('out/**/*.html')
         .pipe(sitemap({
-            siteUrl: config.host,
-            lastmod: false
+          siteUrl: config.host,
+          lastmod: false
         }))
         .pipe(gulp.dest('./out'));
 });
@@ -287,7 +286,7 @@ gulp.task('sitemap', function () {
 
 gulp.task('watch', function() {
   if (process.env.ENV === 'dev') {
-    gulp.watch(['../master/src/**/*', '../master/demo/**/*', '../master/examples/**/*'], ['sources', 'gen']);
+    gulp.watch(['../mobile-angular-ui/src/**/*', '../mobile-angular-ui/demo/**/*', '../mobile-angular-ui/examples/**/*'], ['sources', 'gen']);
   }
   gulp.watch(['templates/**/*', 'contents/**/*'], ['gen']);
   gulp.watch(['assets/img/**/*'], ['img']);
@@ -299,23 +298,26 @@ gulp.task('watch', function() {
 =            Demo            =
 ============================*/
 
-gulp.task('demo', ['sources'], function(){
-  return gulp.src(['bower_components/mobile-angular-ui/demo/**/*', 'bower_components/mobile-angular-ui/dist/**/*'], {base: 'bower_components/mobile-angular-ui/'})
+gulp.task('demo', ['sources'], function() {
+  return gulp.src([
+    'bower_components/mobile-angular-ui/demo/**/*',
+    'bower_components/mobile-angular-ui/dist/**/*'
+  ], {base: 'bower_components/mobile-angular-ui/'})
       .pipe(gulp.dest('out'));
 });
 
-gulp.task('examples', ['sources'], function(){
+gulp.task('examples', ['sources'], function() {
   return gulp.src(['bower_components/mobile-angular-ui/examples/**/*'], {base: 'bower_components/mobile-angular-ui/'})
       .pipe(examples())
       .pipe(gulp.dest('out'));
 });
 
-gulp.task('version', ['sources'], function(){
+gulp.task('version', ['sources'], function() {
   var bowerJson = JSON.parse(fs.readFileSync('bower_components/mobile-angular-ui/bower.json', {encoding: 'utf8'}));
   VERSION = bowerJson.version;
 });
 
-gulp.task('public', function(){
+gulp.task('public', function() {
   return gulp.src(['public/**/*'], {base: 'public/'})
     .pipe(gulp.dest('out'));
 });
@@ -324,7 +326,7 @@ gulp.task('public', function(){
 =            Build Sequence            =
 ======================================*/
 
-gulp.task('build', function(done){
+gulp.task('build', function(done) {
   seq(['clean', 'sources'], ['demo', 'examples', 'version'], ['img', 'css', 'fonts',  'js', 'gen', 'public'], 'sitemap', done);
 });
 
@@ -341,12 +343,12 @@ gulp.task('default', ['build', 'watch', 'connect']);
 gulp.task('sources', function(done) {
   if (process.env.ENV === 'dev') {
     del('bower_components/mobile-angular-ui', function() {
-      gulp.src(['../master/src/js/**/*',
-                '../master/demo/**/*',
-                '../master/examples/**/*',
-                '../master/dist/**/*',
-                '../master/bower.json'],
-                {base: '../master'})
+      gulp.src(['../mobile-angular-ui/src/js/**/*',
+                '../mobile-angular-ui/demo/**/*',
+                '../mobile-angular-ui/examples/**/*',
+                '../mobile-angular-ui/dist/**/*',
+                '../mobile-angular-ui/bower.json'],
+                {base: '../mobile-angular-ui'})
           .pipe(gulp.dest('bower_components/mobile-angular-ui'))
           .on('end', function() {
             console.log('Mobile Angular UI bower Updated');
@@ -354,7 +356,7 @@ gulp.task('sources', function(done) {
           });
     });
   } else {
-    bower.commands.update(['mobile-angular-ui']).on('end', function () {
+    bower.commands.update(['mobile-angular-ui']).on('end', function() {
       console.log('Mobile Angular UI bower Updated');
       done();
     });
@@ -365,11 +367,11 @@ gulp.task('sources', function(done) {
 =            Deploy            =
 ==============================*/
 
-gulp.task('_do_deploy', function(){
+gulp.task('_do_deploy', function() {
   return gulp.src('out/**/*')
-    .pipe(deploy({ remoteUrl: 'git@github.com:mcasimir/mobile-angular-ui.git' }));
+    .pipe(deploy({remoteUrl: 'git@github.com:mcasimir/mobile-angular-ui.git'}));
 });
 
-gulp.task('deploy', function (done) {
-  seq('build', '_do_deploy', done );
+gulp.task('deploy', function(done) {
+  seq('build', '_do_deploy', done);
 });

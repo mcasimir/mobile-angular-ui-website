@@ -1,23 +1,26 @@
-/* global $: true, document: false, window: false, location: false, navigator: false */
+/* jshint browser: true */
+/* global $ */
 
-$(document).ready(function(){
+'use strict';
 
-  var $githubCount = $('.github-count'),
-      $twitterCount = $('.twitter-count'),
-      $googlePlusCount = $('.google-plus-count');
+$(document).ready(function() {
+
+  var $githubCount = $('.github-count');
+  var $twitterCount = $('.twitter-count');
+  var $googlePlusCount = $('.google-plus-count');
 
   if ($githubCount.length || $twitterCount.length || $googlePlusCount.length) {
-    $.get('http://mobile-angular-ui-social.herokuapp.com/', function(data){
-      if (data.github) { 
-        $githubCount.text(''+data.github);
+    $.get('http://mobile-angular-ui-social.herokuapp.com/', function(data) {
+      if (data.github) {
+        $githubCount.text('' + data.github);
         $githubCount.addClass('loaded');
       }
-      if (data.twitter) { 
-        $twitterCount.text(''+data.twitter);
+      if (data.twitter) {
+        $twitterCount.text('' + data.twitter);
         $twitterCount.addClass('loaded');
       }
-      if (data.google) { 
-        $googlePlusCount.text(''+data.google);
+      if (data.google) {
+        $googlePlusCount.text('' + data.google);
         $googlePlusCount.addClass('loaded');
       }
     });
@@ -25,10 +28,10 @@ $(document).ready(function(){
 
   // Open each external links in a new window
   $('a').each(function() {
-     var a = new RegExp('/' + window.location.host + '/');
-     if (!a.test(this.href)) {
-        $(this).attr('target','_blank');
-     }
+    var a = new RegExp('/' + window.location.host + '/');
+    if (!a.test(this.href)) {
+      $(this).attr('target','_blank');
+    }
   });
 
   var $toc = $('#toc');
@@ -36,8 +39,8 @@ $(document).ready(function(){
     //
     // Affix
     //
-    var $tocParent = $toc.parent(),
-        $footer = $('.footer');
+    var $tocParent = $toc.parent();
+    var $footer = $('.footer');
 
     $(window).resize(function() {
       $toc.width($tocParent.width());
@@ -46,7 +49,7 @@ $(document).ready(function(){
     $toc.affix({
       offset: {
         top: $toc.offset().top,
-        bottom: function(){ return $footer.outerHeight(true); }
+        bottom: function() { return $footer.outerHeight(true); }
       }
     });
 
@@ -70,8 +73,8 @@ $(document).ready(function(){
     var scrollSpy = function() {
       // collect all toc items
       var items = [];
-      $toc.find('a').each(function(){
-        items.push({  tocItem: $(this), header: $(this.hash) });
+      $toc.find('a').each(function() {
+        items.push({tocItem: $(this), header: $(this.hash)});
       });
 
       // find last active toc item
@@ -103,7 +106,7 @@ $(document).ready(function(){
     if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
       var href = this.href;
       var target = $(this.hash);
-      target = target.length ? target : $('[name=\'' + this.hash.slice(1) +'\']');
+      target = target.length ? target : $('[name=\'' + this.hash.slice(1) + '\']');
       if (target.length) {
         $('html,body').animate({
           scrollTop: target.offset().top - 70
@@ -125,7 +128,6 @@ $(document).ready(function(){
     }
   });
 
-
   // var entityMap = {
   //   "&": "&amp;",
   //   "<": "&lt;",
@@ -143,8 +145,9 @@ $(document).ready(function(){
 
   // Examples
   var codeModalTemplate = function(manifest) {
-    var i, tab, 
-        modal = '<div class="modal modal-example-code">' +
+    var i;
+    var tab;
+    var modal = '<div class="modal modal-example-code">' +
                 '  <div class="modal-dialog">' +
                 '    <div class="modal-content">' +
                 '      <div class="modal-header">' +
@@ -154,33 +157,35 @@ $(document).ready(function(){
                 '      </div>' +
                 '      <div class="modal-body">' +
                 '        <ul class="nav nav-tabs" role="tablist">';
-      
-      for (i = 0; i < manifest.tabs.length; i++) {
-        tab = manifest.tabs[i];
-        modal += '<li class="' + (i === 0 ? 'active' : '') + '"><a href="#modal-example-code-tab-' + i + '">' + tab.type.toUpperCase() + '</a></li>';
-      }
-      
-      modal +=  '        </ul>' +
-                '        <div class="tab-content">';
-      
-      for (i = 0; i < manifest.tabs.length; i++) {
-        tab = manifest.tabs[i];
-        modal += '<div role="tabpanel" class="tab-pane ' + (i === 0 ? 'active' : '') + '" id="modal-example-code-tab-' + i + '"><pre><code>' + tab.code + '</code></pre></div>';
-      }
 
-      modal +=  '        </div>' +
-                '      </div>' +
-                '    </div>' +
-                '  </div>' +
-                '</div>';
+    for (i = 0; i < manifest.tabs.length; i++) {
+      tab = manifest.tabs[i];
+      modal += '<li class="' + (i === 0 ? 'active' : '') + '"><a href="#modal-example-code-tab-' + i + '">' + tab.type.toUpperCase() + '</a></li>';
+    }
 
-      return modal;
+    modal +=  '        </ul>' +
+            '        <div class="tab-content">';
+
+    for (i = 0; i < manifest.tabs.length; i++) {
+      tab = manifest.tabs[i];
+      modal += '<div role="tabpanel" class="tab-pane ' +
+        (i === 0 ? 'active' : '') + '" id="modal-example-code-tab-' + i +
+          '"><pre><code>' + tab.code + '</code></pre></div>';
+    }
+
+    modal +=  '        </div>' +
+              '      </div>' +
+              '    </div>' +
+              '  </div>' +
+              '</div>';
+
+    return modal;
   };
-  
+
   var codeModal = function(manifest) {
     var modal = $(codeModalTemplate(manifest));
     $('body').append(modal);
-    modal.find('.nav a').click(function (e) {
+    modal.find('.nav a').click(function(e) {
       e.preventDefault();
       $(this).tab('show');
     });
@@ -206,7 +211,7 @@ $(document).ready(function(){
     iframe.attr('frameborder', '0');
     iframe.wrap('<div class="embedded-example-container"></div>');
     var codeButton = $('<a href="#" class="btn btn-xs btn-default btn-show-code"><i class="fa fa-code"></i> Code</a>');
-    codeButton.on('click', function(e) {        
+    codeButton.on('click', function(e) {
       showCode(iframe.attr('src') + '.json');
       e.preventDefault();
       return false;
