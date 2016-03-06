@@ -102,7 +102,7 @@ $(document).ready(function() {
   }
 
   // Smooth scroll
-  $('a[href*=#]:not([href=#]):not([data-slide])').click(function() {
+  $('a[href*="#"]:not([href="#"]):not([data-slide])').click(function() {
     if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
       var href = this.href;
       var target = $(this.hash);

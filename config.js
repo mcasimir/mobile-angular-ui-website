@@ -8,7 +8,7 @@ module.exports = {
   host: 'http://mobileangularui.com/',
   assets: {
     js: [
-      'node_modules/jquery/jquery.js',
+      'node_modules/jquery/dist/jquery.js',
       'node_modules/bootstrap/js/affix.js',
       'node_modules/bootstrap/js/carousel.js',
       'node_modules/bootstrap/js/tab.js',
