@@ -41,5 +41,13 @@
   "bugs": {
     "url": "https://github.com/stackticjs/website/issues"
   },
-  "homepage": "https://github.com/stackticjs/website"
+  "homepage": "https://github.com/stackticjs/website",
+  "devDependencies": {
+    "gulp-depcheck": "1.1.0",
+    "gulp-jscs": "3.0.2",
+    "gulp-jshint": "2.0.0",
+    "gulp-sequence": "0.4.5",
+    "jshint": "2.9.1",
+    "require-all": "2.0.0"
+  }
 }
