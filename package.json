@@ -7,7 +7,7 @@
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
     "jquery": "2.2.1",
-    "mobile-angular-ui": "1.2.0",
+    "mobile-angular-ui": "1.2.1",
     "roboto-fontface": "0.4.5"
   },
   "devDependencies": {

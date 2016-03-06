@@ -186,7 +186,7 @@ module.exports = function(gulp, config) {
         }))
 
         .pipe(render({
-          cwd: path.resolve(__dirname, 'templates'),
+          cwd: path.resolve(__dirname, '../templates'),
           allow: function(node) {
             return node.published !== false && [
                     'module',
@@ -273,7 +273,6 @@ module.exports = function(gulp, config) {
 
   gulp.task('version', [], function() {
     VERSION = require('../package').dependencies['mobile-angular-ui'];
-    console.log('VERSION', VERSION);
   });
 
   gulp.task('public', function() {
