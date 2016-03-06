@@ -2,9 +2,26 @@
   "name": "Mobile-Angular-Ui-Website",
   "version": "0.0.0",
   "description": "Mobile Angular Ui Website",
-  "main": "gulpfile.js",
+  "author": "mcasimir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcasimir/mobile-angular-ui-website/issues"
+  },
+  "homepage": "https://github.com/mcasimir/mobile-angular-ui-website",
   "dependencies": {
-    "bower": "1.3.7",
+    "bootstrap": "3.3.6",
+    "font-awesome": "4.5.0",
+    "jquery": "2.2.1",
+    "mobile-angular-ui": "1.2.0",
+    "roboto-fontface": "0.4.5"
+  },
+  "devDependencies": {
+    "gulp-depcheck": "1.1.0",
+    "gulp-jscs": "3.0.2",
+    "gulp-jshint": "2.0.0",
+    "gulp-sequence": "0.4.5",
+    "jshint": "2.9.1",
+    "require-all": "2.0.0",
     "cheerio": "0.18.0",
     "del": "1.1.1",
     "glob": "4.3.2",
@@ -28,26 +45,5 @@
     "swig": "1.4.2",
     "swig-marked": "0.0.1",
     "swig-traverse": "1.0.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stackticjs/website.git"
-  },
-  "author": "mcasimir",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/stackticjs/website/issues"
-  },
-  "homepage": "https://github.com/stackticjs/website",
-  "devDependencies": {
-    "gulp-depcheck": "1.1.0",
-    "gulp-jscs": "3.0.2",
-    "gulp-jshint": "2.0.0",
-    "gulp-sequence": "0.4.5",
-    "jshint": "2.9.1",
-    "require-all": "2.0.0"
   }
 }

@@ -11,7 +11,6 @@ var uglify            = require('gulp-uglify');
 var cssmin            = require('gulp-cssmin');
 var frontMatter       = require('gulp-front-matter');
 var _                 = require('lodash');
-var bower             = require('bower');
 var htmlmin           = require('gulp-htmlmin');
 var sitemap           = require('gulp-sitemap');
 var docgen            = require('../lib/gulp-docgen');
@@ -24,31 +23,6 @@ var yfm               = function() {
 };
 
 module.exports = function(gulp, config) {
-  /*=============================
-  =            Globs            =
-  =============================*/
-
-  var GLOBS = {};
-  GLOBS.fonts                 = ['bower_components/font-awesome/fonts/fontawesome-webfont.*',
-                                 'bower_components/roboto-fontface/fonts/*'];
-  GLOBS.vendorLess            = [
-    path.resolve(__dirname, 'src/less'),
-    path.resolve(__dirname, 'bower_components')
-  ];
-
-  GLOBS.js = ['jquery/jquery.js',
-              'bootstrap/js/affix.js',
-              'bootstrap/js/carousel.js',
-              'bootstrap/js/tab.js',
-              'bootstrap/js/transition.js',
-              'bootstrap/js/collapse.js',
-              'bootstrap/js/modal.js'].map(function(lib) {
-                return 'bower_components/' + lib;
-              }).concat([
-                'assets/js/expo.js',
-                'assets/js/forum.js',
-                'assets/js/main.js'
-              ]);
 
   var VERSION;
 
@@ -95,7 +69,7 @@ module.exports = function(gulp, config) {
   ===================================*/
 
   gulp.task('fonts', function() {
-    return gulp.src(GLOBS.fonts)
+    return gulp.src(config.assets.fonts)
     .pipe(gulp.dest('out/assets/fonts'));
   });
 
@@ -111,7 +85,7 @@ module.exports = function(gulp, config) {
   gulp.task('css', function() {
 
     return gulp.src('assets/less/main.less')
-    .pipe(less({paths: GLOBS.vendorLess}))
+    .pipe(less({paths: config.assets.less}))
     .pipe(cssmin())
     .pipe(gulp.dest('out/assets/css'))
     .pipe(connect.reload())
@@ -126,7 +100,7 @@ module.exports = function(gulp, config) {
   ==============================================*/
 
   gulp.task('js', function() {
-    return gulp.src(GLOBS.js)
+    return gulp.src(config.assets.js)
     .pipe(concat('main.js'))
     .pipe(uglify())
     .pipe(gulp.dest('out/assets/js'))
@@ -151,9 +125,9 @@ module.exports = function(gulp, config) {
         )
 
         .pipe(tree.append(
-          docgen('bower_components/mobile-angular-ui/src/js',
+          docgen('node_modules/mobile-angular-ui/src/js',
             {
-              cwd: 'bower_components/mobile-angular-ui/'
+              cwd: 'node_modules/mobile-angular-ui/'
             }
           ),
           {
@@ -202,7 +176,7 @@ module.exports = function(gulp, config) {
           )
         )
 
-        .pipe(require('./lib/through').fn(function(stream, obj, done) {
+        .pipe(require('../lib/through').fn(function(stream, obj, done) {
 
           obj.traverse(function(child) {
             child.children = _.sortBy(child.children, ['position','ngdoc', 'name']);
@@ -286,20 +260,20 @@ module.exports = function(gulp, config) {
 
   gulp.task('demo', ['sources'], function() {
     return gulp.src([
-      'bower_components/mobile-angular-ui/demo/**/*',
-      'bower_components/mobile-angular-ui/dist/**/*'
-    ], {base: 'bower_components/mobile-angular-ui/'})
+      'node_modules/mobile-angular-ui/demo/**/*',
+      'node_modules/mobile-angular-ui/dist/**/*'
+    ], {base: 'node_modules/mobile-angular-ui/'})
         .pipe(gulp.dest('out'));
   });
 
   gulp.task('examples', ['sources'], function() {
-    return gulp.src(['bower_components/mobile-angular-ui/examples/**/*'], {base: 'bower_components/mobile-angular-ui/'})
+    return gulp.src(['node_modules/mobile-angular-ui/examples/**/*'], {base: 'node_modules/mobile-angular-ui/'})
         .pipe(examples())
         .pipe(gulp.dest('out'));
   });
 
   gulp.task('version', ['sources'], function() {
-    var bowerJson = JSON.parse(fs.readFileSync('bower_components/mobile-angular-ui/bower.json', {encoding: 'utf8'}));
+    var bowerJson = JSON.parse(fs.readFileSync('node_modules/mobile-angular-ui/bower.json', {encoding: 'utf8'}));
     VERSION = bowerJson.version;
   });
 
@@ -328,25 +302,27 @@ module.exports = function(gulp, config) {
 
   gulp.task('sources', function(done) {
     if (process.env.ENV === 'dev') {
-      del('bower_components/mobile-angular-ui', function() {
+      del('node_modules/mobile-angular-ui', function() {
         gulp.src(['../mobile-angular-ui/src/js/**/*',
                   '../mobile-angular-ui/demo/**/*',
                   '../mobile-angular-ui/examples/**/*',
                   '../mobile-angular-ui/dist/**/*',
                   '../mobile-angular-ui/bower.json'],
                   {base: '../mobile-angular-ui'})
-            .pipe(gulp.dest('bower_components/mobile-angular-ui'))
+            .pipe(gulp.dest('node_modules/mobile-angular-ui'))
             .on('end', function() {
-              console.log('Mobile Angular UI bower Updated');
+              console.log('Mobile Angular UI Updated');
               done();
             });
       });
     } else {
-      bower.commands.update(['mobile-angular-ui']).on('end', function() {
-        console.log('Mobile Angular UI bower Updated');
+      require('child_process').exec('npm update mobile-angular-ui', function(err) {
+        if (err) {
+          throw new Error('unable to update mobile-angular-ui');
+        }
+        console.log('Mobile Angular UI updated');
         done();
       });
     }
   });
-
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(gulp) {
+module.exports = function(gulp, config) {
 
   gulp.task('depcheck:require-strict', function() {
     let pkg = require('../package');
@@ -17,11 +17,19 @@ module.exports = function(gulp) {
 
   gulp.task('depcheck', ['depcheck:require-strict'], require('gulp-depcheck')({
     ignoreDirs: ['client', 'public'],
-    ignoreMatches: assetsModules().concat([])
+    ignoreMatches: assetsModules().concat([
+      'mobile-angular-ui'
+    ])
   }));
 
   function assetsModules() {
-    return [];
+    return config.assets.js
+    .concat(config.assets.fonts)
+      .filter(function(path) {
+        return path.match(/^node_modules/);
+      }).map(function(path) {
+        return path.split('/')[1];
+      });
   }
 };
 
