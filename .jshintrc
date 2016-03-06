@@ -1,0 +1,9 @@
+{
+  "esnext": true,
+  "strict": true,
+  "node": true,
+  "browser": false,
+  "quotmark": "single",
+  "unused": true,
+  "predef": []
+}
