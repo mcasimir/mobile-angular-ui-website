@@ -5,44 +5,82 @@ position: 0
 
 ### Installation
 
-Either install via `bower` or download it
+Install via `npm` or download the latest release from https://github.com/mcasimir/mobile-angular-ui/releases
 
 ``` sh
-bower install --save mobile-angular-ui
+npm install --save mobile-angular-ui
 ```
 
-#### Using the boilerplate
-
-If you want to have your Mobile Angular UI project bootstrapped in a minute you can use the `generator-mobileangularui` generator for Yeoman.
+### Quick start
 
 ``` sh
-npm install -g bower yo gulp generator-mobileangularui
+npm install --save mobile-angular-ui angular angular-route
 ```
 
-Using the generator is super-easy and fast
+``` html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My App</title>
 
-``` sh
-mkdir myApp
-cd myApp
-yo mobileangularui
+    <!-- Only required for desktop -->
+    <link rel="stylesheet" href="/node_modules/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
+
+    <!-- Always required -->
+    <link rel="stylesheet" href="/node_modules/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
+
+    <!-- Only required for desktop -->
+    <link rel="stylesheet" href="/node_modules/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
+
+    <script src="/node_modules/angular/angular.min.js"></script>
+    <script src="/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/node_modules/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
+    <script type="text/javascript">
+      angular.module('myApp', [
+        'ngRoute',
+        'mobile-angular-ui'
+      ]);
+    </script>
+  </head>
+  <body ng-app="myApp">
+
+    <!-- Sidebars -->
+    <div class="sidebar sidebar-left"><!-- ... --></div>
+    <div class="sidebar sidebar-right"><!-- ... --></div>
+
+    <div class="app">
+      <div class="navbar navbar-app navbar-absolute-top"><!-- Top Navbar --></div>
+      <div class="navbar navbar-app navbar-absolute-bottom"><!-- Bottom Navbar --></div>
+
+      <!-- App body -->
+
+      <div class='app-body'>
+        <div class='app-content'>
+          <ng-view></ng-view>
+        </div>
+      </div>
+    </div><!-- ~ .app -->
+
+    <!-- Modals and Overlays -->
+    <div ui-yield-to="modals"></div>
+  </body>
+</html>
 ```
-
-You can find a complete tutorial to start a Phonegap project with mobile-angular-ui <a href="/blog/your-first-phonegap-app-with-mobile-angular-ui/">here</a>.
 
 ### Support and Compatibility
 
-Mobile Angular UI 1.2 is compatible with:
-- AngularJs 1.2 and 1.3
+Mobile Angular UI 1.3.1 is compatible with:
+- AngularJs 1.2 to 1.5
 - Boostrap 3.x sources *
 
 <div class="alert alert-info">
 \* = Mobile Angular UI is automatically built from Bootstrap `.less` sources. Bootstrap less are compiled with mobile-angular-ui stylesheets and then passed to a pipeline that transforms them to __mobilified__ stylesheets.
 </div>
 
-
 #### Browser Support
 
-Anything that can run Bootstrap 3 and Angular 1.3 and supports CSS3
+Anything that can run Bootstrap 3 and Angular and supports CSS3
 transitions and transforms should fit:
 
 - Chrome
@@ -70,7 +108,7 @@ transitions and transforms should fit:
 **Note n.4**: If you notice frozen application on older devices be aware that this may be mainly due to device resources scarcity and not due to your application or framework you are using. If you have to forcefully support them try to lower your application footprint as much as you can.
 
 See also:
- 
+
  - http://getbootstrap.com/getting-started/#support
  - https://docs.angularjs.org/guide/ie
 
@@ -136,90 +174,6 @@ angular.module('mobile-angular-ui', [
 | `dist/js/mobile-angular-ui.core.min.js` | Core Module |
 | `dist/js/mobile-angular-ui.components.min.js` | Components |
 
-##### Examples
-
-###### Setting up a mobile only app
-
-``` html
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
-<script src="angular.min.js">
-</script>
-<script src="angular-route.min.js">
-</script>
-<script src="mobile-angular-ui/dist/js/mobile-angular-ui.min.js">
-</script>
-```
-
-###### Setting up a responsive app
-
-``` html
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
-<script src="angular.min.js">
-</script>
-<script src="angular-route.min.js">
-</script>
-<script src="mobile-angular-ui/dist/js/mobile-angular-ui.min.js">
-</script>
-```
-
-###### Enabling built-in gestures modules (not stable yet)
-
-``` html
-<!-- Required to use $drag, $swipe and Translate services -->
-<script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
-```
-
-###### Use the migration module to move from v1.1 to v1.2
-
-``` html
-<!-- Only required to import legacy syntax and directives. You won't need it 
-unless you are attempting to move an app from Mobile Angular UI 1.1 to 1.2 -->
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-migrate.min.css" />
-<script src="/dist/js/mobile-angular-ui.migrate.min.js"></script>
-```
-
-###### Use with other css frameworks (ie. [Topcoat](http://topcoat.io/))
-
-``` html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-mobile-dark.css" />
-<script src="angular.min.js">
-</script>
-<script src="angular-route.min.js">
-</script>
-<script src="mobile-angular-ui/dist/js/mobile-angular-ui.core.min.js">
-</script>
-<script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
-```
-
-#### Basic Layout
-
-``` html
-<body ng-app="myApp">
-
-  <!-- Sidebars -->
-  <div class="sidebar sidebar-left"><!-- ... --></div>
-  <div class="sidebar sidebar-right"><!-- ... --></div>
-
-  <div class="app">
-    <div class="navbar navbar-app navbar-absolute-top"><!-- Top Navbar --></div>
-    <div class="navbar navbar-app navbar-absolute-bottom"><!-- Bottom Navbar --></div>
-    
-    <!-- App body -->
-    
-    <div class='app-body'>
-      <div class='app-content'>
-        <ng-view></ng-view>
-      </div>
-    </div>
-  </div><!-- ~ .app -->
-
-  <!-- Modals and Overlays -->
-  <div ui-yield-to="modals"></div>
-
-</body>
-```
 
 #### Differences with Bootstrap 3
 
@@ -231,4 +185,3 @@ unless you are attempting to move an app from Mobile Angular UI 1.1 to 1.2 -->
 6. Responsive grid is divided in two parts: `.col-xs-*` and `.col-sm-*` classes are included in base.css, `.col-md-*` and `.col-lg-*` classes are included in desktop.css.
 7. Breadcrumbs and pagination are just not the best way to navigate a mobile app so their are only included in desktop.css.
 8. `.container` is always fluid.
-

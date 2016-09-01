@@ -2,7 +2,7 @@
 title: "Gunks"
 created_at: 2016-8-27
 description: "Rock climbing guidebooks"
-icon: "/assets/img/apps/grunks/icon.png"
+icon: "/assets/img/apps/gunks/icon.png"
 ---
 
 Gunks Apps provides digital guidebooks for the Trapps, Nears, and Peter's Kill rock climbing cliffs and boulders in the Shawangunks of upstate New York.
@@ -12,8 +12,8 @@ Gunks Apps provides digital guidebooks for the Trapps, Nears, and Peter's Kill r
   <a class="expo-next" href="#next"><i class="fa fa-chevron-right"></i></a>
   <div class="expo-track overthrow">
     <div class="expo-viewport">
-      <span class="expo-item"><img src="/assets/img/apps/grunks/screen-1.png" alt=""></span>
-      <span class="expo-item"><img src="/assets/img/apps/grunks/screen-2.png" alt=""></span>
+      <span class="expo-item"><img src="/assets/img/apps/gunks/screen-1.png" alt=""></span>
+      <span class="expo-item"><img src="/assets/img/apps/gunks/screen-2.png" alt=""></span>
     </div>
   </div>
 </div>

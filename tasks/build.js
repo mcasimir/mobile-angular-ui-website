@@ -314,7 +314,7 @@ module.exports = function(gulp, config) {
             });
       });
     } else {
-      require('child_process').exec('npm update mobile-angular-ui', function(err) {
+      require('child_process').exec('npm i --save --save-exact mobile-angular-ui@latest', function(err) {
         if (err) {
           throw new Error('unable to update mobile-angular-ui');
         }
