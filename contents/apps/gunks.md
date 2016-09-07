@@ -22,5 +22,5 @@ Gunks Apps provides digital guidebooks for the Trapps, Nears, and Peter's Kill r
   <dt>Available</dt>
   <dd>[Android](https://play.google.com/store/apps/details?id=com.gunksapps.gunks), [IOS](https://itunes.apple.com/us/app/the-gunks/id1086455442?mt=8)</dd>
   <dt>Website</dt>
-  <dd>[GurnksApps](https://gunksapps.com)</dd>
+  <dd>[GunksApps](https://gunksapps.com)</dd>
 </dl>
