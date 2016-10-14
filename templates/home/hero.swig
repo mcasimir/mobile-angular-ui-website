@@ -12,7 +12,7 @@
     </div>
     <div class="btn-group btn-group-claim">
 
-      <a href="https://github.com/mcasimir/mobile-angular-ui/archive/{{version}}.zip"
+      <a href="https://github.com/mcasimir/mobile-angular-ui/archive/v{{version}}.zip"
           class="btn btn-claim btn-lg">
         <i class="fa fa-download">
         </i>
@@ -41,7 +41,7 @@
           </a>
           <a href="https://twitter.com/mobileangularui" target="blank" class="btn">
             <span class="btn-social"><i class="fa fa-twitter"></i></span>
-            <span class="twitter-count flag"></span>          
+            <span class="twitter-count flag"></span>
           </a>
           <a href="https://plus.google.com/+MobileangularuiGp" target="blank" class="btn">
             <span class="btn-social"><i class="fa fa-google-plus"></i></span>
